@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicropostMVC", "MicropostMVC\MicropostMVC.csproj", "{D9005514-2573-4A32-90CE-D4F57CE67F8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicropostTest", "MicropostTest\MicropostTest.csproj", "{3763DD69-7FAF-4BA0-86E8-D68A9AB9D288}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9005514-2573-4A32-90CE-D4F57CE67F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9005514-2573-4A32-90CE-D4F57CE67F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9005514-2573-4A32-90CE-D4F57CE67F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9005514-2573-4A32-90CE-D4F57CE67F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3763DD69-7FAF-4BA0-86E8-D68A9AB9D288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3763DD69-7FAF-4BA0-86E8-D68A9AB9D288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3763DD69-7FAF-4BA0-86E8-D68A9AB9D288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3763DD69-7FAF-4BA0-86E8-D68A9AB9D288}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
