@@ -20,7 +20,7 @@ namespace MicropostTest.Features
 
         public static string UrlMicropostsMvc
         {
-            get { return "http://localhost:10352"; }
+            get { return "http://localhost:10351"; }
         }
     }
 }
