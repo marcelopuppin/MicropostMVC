@@ -2,17 +2,17 @@ using System.Web.Mvc;
 using Machine.Specifications;
 using MicropostMVC.Controllers;
 
-namespace MicropostTest.Specifications
+namespace MicropostTest.Specifications.Pages
 {
     [Subject(typeof(PagesController))]
-    public class when_about_action_is_invoked
+    public class when_help_action_is_invoked
     {
         static PagesController controller;
         static ActionResult result;
 
         Establish context = () => controller = new PagesController();
 
-        Because of = () => result = controller.About();
+        Because of = () => result = controller.Help();
 
         It should_return_a_view = () =>
                                       {

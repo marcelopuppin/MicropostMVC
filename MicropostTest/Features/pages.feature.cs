@@ -19,7 +19,7 @@ namespace MicropostTest.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.8.1.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Acessing links at the root page")]
+    [NUnit.Framework.DescriptionAttribute("Accessing links at the root page")]
     public partial class AccessingLinksAtTheRootPageFeature
     {
         
@@ -32,7 +32,7 @@ namespace MicropostTest.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Acessing links at the root page", "", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Accessing links at the root page", "", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -138,6 +138,25 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Then("the result is the \'Contact\' page");
 #line 26
  testRunner.And("the title is \'Contact\'");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Invoking the Sign up link")]
+        public virtual void InvokingTheSignUpLink()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invoking the Sign up link", ((string[])(null)));
+#line 28
+this.ScenarioSetup(scenarioInfo);
+#line 29
+  testRunner.Given("a startup root page");
+#line 30
+ testRunner.When("I click the \'Sign up now!\' link");
+#line 31
+ testRunner.Then("the result is the \'Sign up\' page");
+#line 32
+ testRunner.And("the title is \'Sign up\'");
 #line hidden
             this.ScenarioCleanup();
         }

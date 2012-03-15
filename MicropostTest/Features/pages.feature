@@ -1,4 +1,4 @@
-﻿Feature: Acessing links at the root page
+﻿Feature: Accessing links at the root page
 	
 Scenario: Invoking the Home link
  	Given a startup root page
@@ -25,3 +25,8 @@ Scenario: Invoking the Contact link
 	Then the result is the 'Contact' page
 	And the title is 'Contact'
 	
+Scenario: Invoking the Sign up link
+ 	Given a startup root page
+	When I click the 'Sign up now!' link
+	Then the result is the 'Sign up' page
+	And the title is 'Sign up'

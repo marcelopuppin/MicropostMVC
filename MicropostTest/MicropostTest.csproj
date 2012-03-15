@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=2.1.265.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="FluentMongo">
       <HintPath>..\packages\FluentMongo.1.3.1.1\lib\FluentMongo.dll</HintPath>
     </Reference>
@@ -104,10 +108,13 @@
     <Compile Include="Features\WebBrowser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecFlowNUnitExtension.cs" />
-    <Compile Include="Specifications\when_about_action_is_invoked.cs" />
-    <Compile Include="Specifications\when_contact_action_is_invoked.cs" />
-    <Compile Include="Specifications\when_help_action_is_invoked.cs" />
-    <Compile Include="Specifications\when_home_action_is_invoked.cs" />
+    <Compile Include="Specifications\Pages\when_about_action_is_invoked.cs" />
+    <Compile Include="Specifications\Pages\when_contact_action_is_invoked.cs" />
+    <Compile Include="Specifications\Pages\when_help_action_is_invoked.cs" />
+    <Compile Include="Specifications\Pages\when_home_action_is_invoked.cs" />
+    <Compile Include="Specifications\Users\when_signup_action_is_invoked.cs" />
+    <Compile Include="UnitTests\Mapping\UserMappingTest.cs" />
+    <Compile Include="UnitTests\Repositories\MongoRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -117,9 +124,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UnitTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MicropostMVC\MicropostMVC.csproj">
       <Project>{D9005514-2573-4A32-90CE-D4F57CE67F8B}</Project>

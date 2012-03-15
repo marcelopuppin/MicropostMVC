@@ -2,7 +2,7 @@
 using Machine.Specifications;
 using MicropostMVC.Controllers;
 
-namespace MicropostTest.Specifications
+namespace MicropostTest.Specifications.Pages
 {
     [Subject(typeof(PagesController))] 
     public class when_home_action_is_invoked 
