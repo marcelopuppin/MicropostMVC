@@ -14,13 +14,13 @@ namespace MicropostMVC.BusinessServices
             _repository = repository;
         }
 
-        public string GetStoredPasswordHash(string id)
+        public string GetStoredPasswordHash(BoRef id)
         {
             var userBo = _repository.FindById<UserBo>(id);
             return userBo != null ? userBo.PasswordHash : string.Empty;
         }
 
-        public string GetStoredPasswordSalt(string id)
+        public string GetStoredPasswordSalt(BoRef id)
         {
             var userBo = _repository.FindById<UserBo>(id);
             return userBo != null ? userBo.PasswordSalt : string.Empty;

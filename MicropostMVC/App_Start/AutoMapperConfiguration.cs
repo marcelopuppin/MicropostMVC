@@ -17,7 +17,7 @@ namespace MicropostMVC.App_Start {
         {
             Mapper.CreateMap<UserModel, UserBo>()
                 .ForMember(dest => dest.Id,
-                           opt => opt.ResolveUsing(src => ObjectIdConverter.ConvertStringToObjectId(src.Id)))
+                           opt => opt.ResolveUsing(src => ObjectIdConverter.ConvertBoRefToObjectId(src.Id)))
                 .ForMember(dest => dest.PasswordHash,
                            opt => opt.ResolveUsing(src => {
                                   var encryptorBS = DependencyResolver.Current.GetService<IEncryptorBS>();
@@ -31,7 +31,7 @@ namespace MicropostMVC.App_Start {
 
             Mapper.CreateMap<UserBo, UserModel>()
                 .ForMember(dest => dest.Id,
-                           opt => opt.ResolveUsing(src => ObjectIdConverter.ConvertObjectIdToString(src.Id)))
+                           opt => opt.ResolveUsing(src => ObjectIdConverter.ConvertObjectIdToBoRef(src.Id)))
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
                 .ForMember(dest => dest.PasswordConfirmation, opt => opt.Ignore());
 

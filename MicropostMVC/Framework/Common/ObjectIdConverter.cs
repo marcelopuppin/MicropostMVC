@@ -4,22 +4,22 @@ namespace MicropostMVC.Framework.Common
 {
     public static class ObjectIdConverter
     {
-        public static ObjectId ConvertStringToObjectId(string id)
+        public static ObjectId ConvertBoRefToObjectId(BoRef id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null || id.IsEmpty())
             {
                 return ObjectId.GenerateNewId();
             }
-            return new ObjectId(id.Replace("\"", ""));
+            return new ObjectId(id.Value.Replace("\"", ""));
         }
 
-        public static string ConvertObjectIdToString(ObjectId id)
+        public static BoRef ConvertObjectIdToBoRef(ObjectId id)
         {
             if (id == ObjectId.Empty)
             {
-                return string.Empty;
+                return new BoRef();
             }
-            return id.ToString();
+            return new BoRef(id.ToString());
         }
     }
 }

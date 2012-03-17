@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MicropostMVC.App_Start;
 using MicropostMVC.BusinessObjects;
+using MicropostMVC.Framework.Common;
 using MicropostMVC.Models;
 using MongoDB.Bson;
 using NUnit.Framework;
@@ -57,7 +58,7 @@ namespace MicropostTest.UnitTests.Mapping
         public void ViewModelToBusinessObject_Empty_Id()
         {
             var user = new UserModel();
-            user.Id = string.Empty;
+            user.Id = new BoRef();
             UserBo userBo = Mapper.Map<UserModel, UserBo>(user);
             Assert.That(userBo.Id, Is.Not.EqualTo(ObjectId.Empty));
         }
@@ -75,7 +76,7 @@ namespace MicropostTest.UnitTests.Mapping
         public void ViewModelToBusinessObject_Id()
         {
             var user = new UserModel();
-            user.Id = "4f5ea430ee62da0cc0df2483";
+            user.Id = new BoRef("4f5ea430ee62da0cc0df2483");
             UserBo userBo = Mapper.Map<UserModel, UserBo>(user);
             Assert.That(userBo.Id.ToString(), Is.EqualTo(user.Id));
         }

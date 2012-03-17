@@ -34,10 +34,10 @@ namespace MicropostMVC.Framework.Repository
             return (result != null && result.Ok);
         }
 
-        public T FindById<T>(string id) where T : IBoBase
+        public T FindById<T>(BoRef id) where T : IBoBase
         {
             MongoCollection collection = GetCollection<T>();
-            return collection.FindOneByIdAs<T>(ObjectIdConverter.ConvertStringToObjectId(id));
+            return collection.FindOneByIdAs<T>(ObjectIdConverter.ConvertBoRefToObjectId(id));
         }
     
         public void Dispose()

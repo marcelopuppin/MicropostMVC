@@ -1,10 +1,18 @@
 ﻿using System.Web.Mvc;
+using MicropostMVC.BusinessServices;
 using MicropostMVC.Models;
 
 namespace MicropostMVC.Controllers
 {
     public class UsersController : Controller
     {
+        private readonly IUserBS _userBS;
+
+        public UsersController(IUserBS userBS)
+        {
+            _userBS = userBS;
+        }
+
         public ActionResult SignIn()
         {
             return View();
@@ -19,8 +27,8 @@ namespace MicropostMVC.Controllers
         [HttpPost]
         public ActionResult SignUp(UserModel user)
         {
-            UserModel newUser = user.Save();
-            if (string.IsNullOrEmpty(newUser.Id)) 
+            UserModel newUser = _userBS.Save(user);
+            if (newUser.Id.IsEmpty()) 
             {
                 ViewBag.Error = "Sign up failure!";
                 return View(user);

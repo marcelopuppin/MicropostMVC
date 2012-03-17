@@ -159,6 +159,8 @@
     <Compile Include="BusinessServices\IEncryptorBS.cs" />
     <Compile Include="BusinessServices\EncryptorBS.cs" />
     <Compile Include="BusinessServices\IHashSalt.cs" />
+    <Compile Include="BusinessServices\IUserBS.cs" />
+    <Compile Include="Framework\Common\BoRef.cs" />
     <Compile Include="Framework\Common\ObjectIdConverter.cs" />
     <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
@@ -166,8 +168,11 @@
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Framework\Common\Encryptor.cs" />
+    <Compile Include="Framework\DependencyResolution\InjectAttribute.cs" />
     <Compile Include="Framework\DependencyResolution\IoC.cs" />
     <Compile Include="Framework\DependencyResolution\SmDependencyResolver.cs" />
+    <Compile Include="Framework\DependencyResolution\SmControllerActivator.cs" />
+    <Compile Include="Framework\DependencyResolution\SmInjectAttributeConvention.cs" />
     <Compile Include="Framework\Repository\IBoBase.cs" />
     <Compile Include="Framework\Repository\IRepository.cs" />
     <Compile Include="Framework\Repository\MongoBo.cs" />
@@ -175,6 +180,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="BusinessServices\UserBS.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

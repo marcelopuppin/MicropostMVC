@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.DependencyResolution;
 using MicropostMVC.Framework.Repository;
 using StructureMap;
@@ -29,14 +32,14 @@ namespace MicropostMVC
             routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+                defaults: new {id = RouteParameter.Optional}
+                );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Pages", action = "Home", id = UrlParameter.Optional }
-            );
+                defaults: new {controller = "Pages", action = "Home", id = UrlParameter.Optional}
+                );
         }
 
         protected void Application_Start()

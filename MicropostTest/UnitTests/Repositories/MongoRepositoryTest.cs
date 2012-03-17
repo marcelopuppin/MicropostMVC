@@ -1,4 +1,5 @@
 ﻿using MicropostMVC.BusinessObjects;
+using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.Repository;
 using MongoDB.Bson;
 using NUnit.Framework;
@@ -29,7 +30,8 @@ namespace MicropostTest.UnitTests.Repositories
             bool saved = _repository.Save(user);
             Assert.That(saved, Is.True);
 
-            var userSaved = _repository.FindById<UserBo>(user.Id.ToString());
+            BoRef id = ObjectIdConverter.ConvertObjectIdToBoRef(user.Id);
+            var userSaved = _repository.FindById<UserBo>(id);
             Assert.That(userSaved, Is.Not.Null);
             Assert.That(userSaved.Id, Is.EqualTo(user.Id));
         } 

@@ -1,9 +1,13 @@
+using MicropostMVC.Framework.Common;
+using MicropostMVC.Framework.DependencyResolution;
+
 namespace MicropostMVC.BusinessServices
 {
+    [Inject]
     public interface IEncryptorBS
     {
-        string GetStoredPasswordHash(string id);
-        string GetStoredPasswordSalt(string id);
+        string GetStoredPasswordHash(BoRef id);
+        string GetStoredPasswordSalt(BoRef id);
         IHashSalt CreatePasswordHashSalt(string password);
     }
 }
