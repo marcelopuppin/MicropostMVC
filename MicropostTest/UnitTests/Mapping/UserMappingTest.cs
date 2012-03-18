@@ -69,7 +69,7 @@ namespace MicropostTest.UnitTests.Mapping
             var userBo = new UserBo();
             userBo.Id = new ObjectId();
             UserModel userModel = Mapper.Map<UserBo, UserModel>(userBo);
-            Assert.That(userModel.Id, Is.Empty);
+            Assert.That(userModel.Id.Value, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace MicropostTest.UnitTests.Mapping
             var user = new UserModel();
             user.Id = new BoRef("4f5ea430ee62da0cc0df2483");
             UserBo userBo = Mapper.Map<UserModel, UserBo>(user);
-            Assert.That(userBo.Id.ToString(), Is.EqualTo(user.Id));
+            Assert.That(userBo.Id.ToString(), Is.EqualTo(user.Id.Value));
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace MicropostTest.UnitTests.Mapping
             var userBo = new UserBo();
             userBo.Id = ObjectId.GenerateNewId();
             UserModel userModel = Mapper.Map<UserBo, UserModel>(userBo);
-            Assert.That(userModel.Id, Is.EqualTo(userBo.Id.ToString()));
+            Assert.That(userModel.Id.Value, Is.EqualTo(userBo.Id.ToString()));
         }
 
         [Test]
