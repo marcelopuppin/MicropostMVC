@@ -9,5 +9,6 @@ namespace MicropostMVC.Framework.Repository
     {
         bool Save<T>(T item) where T : IBoBase;
         T FindById<T>(BoRef id) where T : IBoBase;
+        T FindByKeyValue<T>(string key, object value) where T : IBoBase;
     }
 }

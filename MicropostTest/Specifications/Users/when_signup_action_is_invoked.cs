@@ -13,11 +13,11 @@ namespace MicropostTest.Specifications.Users
         static UsersController controller;
         static ActionResult result;
 
-        private Establish context = () =>
-                                        {
-                                            var userBSMock = new Mock<IUserBS>();
-                                            controller = new UsersController(userBSMock.Object);
-                                        };
+        Establish context = () =>
+                                {
+                                    var userBSMock = new Mock<IUserBS>();
+                                    controller = new UsersController(userBSMock.Object);
+                                };
 
         Because of = () => result = controller.SignUp();
 

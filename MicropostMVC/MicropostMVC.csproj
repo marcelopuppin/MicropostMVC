@@ -185,6 +185,36 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\blueprint\ie.css" />
+    <Content Include="Content\blueprint\plugins\buttons\icons\cross.png" />
+    <Content Include="Content\blueprint\plugins\buttons\icons\key.png" />
+    <Content Include="Content\blueprint\plugins\buttons\icons\tick.png" />
+    <Content Include="Content\blueprint\plugins\buttons\readme.txt" />
+    <Content Include="Content\blueprint\plugins\buttons\screen.css" />
+    <Content Include="Content\blueprint\plugins\fancy-type\readme.txt" />
+    <Content Include="Content\blueprint\plugins\fancy-type\screen.css" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\doc.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\email.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\external.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\feed.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\im.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\lock.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\pdf.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\visited.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\icons\xls.png" />
+    <Content Include="Content\blueprint\plugins\link-icons\readme.txt" />
+    <Content Include="Content\blueprint\plugins\link-icons\screen.css" />
+    <Content Include="Content\blueprint\plugins\rtl\readme.txt" />
+    <Content Include="Content\blueprint\plugins\rtl\screen.css" />
+    <Content Include="Content\blueprint\print.css" />
+    <Content Include="Content\blueprint\screen.css" />
+    <Content Include="Content\blueprint\src\forms.css" />
+    <Content Include="Content\blueprint\src\grid.css" />
+    <Content Include="Content\blueprint\src\grid.png" />
+    <Content Include="Content\blueprint\src\ie.css" />
+    <Content Include="Content\blueprint\src\print.css" />
+    <Content Include="Content\blueprint\src\reset.css" />
+    <Content Include="Content\blueprint\src\typography.css" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

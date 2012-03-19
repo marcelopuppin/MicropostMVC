@@ -27,12 +27,19 @@ namespace MicropostMVC.Controllers
         [HttpPost]
         public ActionResult SignUp(UserModel user)
         {
+            if (_userBS.IsEmailUsedBySomeone(user))
+            {
+                ModelState.AddModelError(string.Empty, "Email is already used by someone!");
+                return View(user);
+            }
+            
             UserModel newUser = _userBS.Save(user);
             if (newUser.Id.IsEmpty()) 
             {
-                ViewBag.Error = "Sign up failure!";
+                ModelState.AddModelError(string.Empty, "Sign up failure!");
                 return View(user);
             }
+
             return View("Show", newUser);
         }
 

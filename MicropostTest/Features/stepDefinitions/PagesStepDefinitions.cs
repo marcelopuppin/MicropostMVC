@@ -2,7 +2,7 @@
 using TechTalk.SpecFlow;
 using WatiN.Core;
 
-namespace MicropostTest.Features.pages.steps
+namespace MicropostTest.Features.stepDefinitions
 {
     [Binding]
     public class PagesStepDefinitions

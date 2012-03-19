@@ -21,7 +21,7 @@ namespace MicropostMVC.Models
 
         [Required, StringLength(50, MinimumLength = 6),
          EqualTo("Password"),
-         Display(Name = "Password Confirmation")]
+         Display(Name = "Confirmation")]
         public string PasswordConfirmation { get; set; }
 
     }

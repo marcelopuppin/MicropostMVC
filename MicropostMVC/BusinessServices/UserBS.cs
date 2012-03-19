@@ -2,7 +2,6 @@ using AutoMapper;
 using MicropostMVC.BusinessObjects;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Repository;
-using MongoDB.Bson;
 
 namespace MicropostMVC.Models
 {
@@ -32,6 +31,13 @@ namespace MicropostMVC.Models
                 return Mapper.Map<UserBo, UserModel>(userBo);
             }
             return new UserModel();
+        }
+
+        public bool IsEmailUsedBySomeone(UserModel user)
+        {
+            UserBo thisUserBo = Mapper.Map<UserModel, UserBo>(user);
+            var otherUserBo = _repository.FindByKeyValue<UserBo>("Email", thisUserBo.Email.ToLower());
+            return (otherUserBo != null && thisUserBo.Id != otherUserBo.Id);
         }
     }
 }

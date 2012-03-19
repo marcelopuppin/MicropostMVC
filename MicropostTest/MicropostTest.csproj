@@ -98,13 +98,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\pages.steps\PagesStepDefinitions.cs" />
+    <Compile Include="Features\stepDefinitions\PagesStepDefinitions.cs" />
+    <Compile Include="Features\stepDefinitions\SignUpStepDefinitions.cs" />
     <Compile Include="Features\teardown\AccessingLinksAtTheRootPageFeature.cs" />
     <Compile Include="Features\pages.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>pages.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\signup.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>signup.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\teardown\SigningUpUsersFeature.cs" />
+    <Compile Include="Features\teardown\TeardownFeature.cs" />
     <Compile Include="Features\WebBrowser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecFlowNUnitExtension.cs" />
@@ -113,14 +121,21 @@
     <Compile Include="Specifications\Pages\when_help_action_is_invoked.cs" />
     <Compile Include="Specifications\Pages\when_home_action_is_invoked.cs" />
     <Compile Include="Specifications\Users\when_signup_action_is_invoked.cs" />
+    <Compile Include="Specifications\Users\when_signing_up_with_new_valid_user.cs" />
+    <Compile Include="Specifications\Users\when_signing_up_user_with_email_used_by_someone.cs" />
+    <Compile Include="UnitTests\Framework\EncryptorTest.cs" />
     <Compile Include="UnitTests\Mapping\UserMappingTest.cs" />
-    <Compile Include="UnitTests\Repositories\MongoRepositoryTest.cs" />
+    <Compile Include="UnitTests\Repositories\UserRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\pages.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>pages.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\signup.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>signup.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

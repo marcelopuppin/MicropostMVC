@@ -20,16 +20,18 @@ fieldset {
 }
 
 legend {
-    font-size: 1.2em;
+    font-size: 0.8em;
     font-weight: bold;
 }
 
 textarea {
     min-height: 75px;
+    min-width: 150px;
 }
 
 .editor-label {
     margin: 1em 0 0 0;
+    font-weight: bold;
 }
 
 .editor-field {
@@ -39,21 +41,26 @@ textarea {
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
-.field-validation-error {
+.field-validation-error
+{
     color: #f00;
+    font-size: small;
 }
 
 .field-validation-valid {
     display: none;
 }
 
-.input-validation-error {
+.input-validation-error
+{
     border: 1px solid #f00;
     background-color: #fee;
 }
 
-.validation-summary-errors {
+.validation-summary-errors
+{
     font-weight: bold;
+    font-size: medium;
     color: #f00;
 }
 
@@ -61,6 +68,23 @@ textarea {
     display: none;
 }
 
+.validation-summary-errors
+{
+    background-color: #fee;
+    border: 2px dotted #f00;
+    margin-bottom: 10px;
+} 
+
+span.validation-summary-errors { 
+    border-bottom-color: #fee; 
+    display:block; 
+} 
+
+ul.validation-summary-errors { 
+    margin:0; 
+    padding:0; 
+    border-top:none; 
+    } 
 
 /* Microposts MVC 
 -----------------------------------------------------------*/

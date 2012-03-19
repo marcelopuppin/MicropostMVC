@@ -1,11 +1,6 @@
 namespace MicropostTest.Features
 {
-    public partial class AccessingLinksAtTheRootPageFeature
+    public partial class AccessingLinksAtTheRootPageFeature : TeardownFeature
     {
-        [NUnit.Framework.TestFixtureTearDownAttribute]
-        public virtual void MyScenarioTeardown()
-        {
-            WebBrowser.Current.Close();
-        }
     }
 }

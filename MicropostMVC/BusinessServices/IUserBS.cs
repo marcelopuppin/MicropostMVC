@@ -7,5 +7,6 @@ namespace MicropostMVC.BusinessServices
     public interface IUserBS
     {
         UserModel Save(UserModel user);
+        bool IsEmailUsedBySomeone(UserModel user);
     }
 }

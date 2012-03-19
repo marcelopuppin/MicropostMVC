@@ -11,6 +11,11 @@ namespace MicropostMVC.Framework.Repository
         private readonly MongoServer _server;
         private readonly MongoDatabase _database;
 
+        public MongoDatabase Database
+        {
+            get { return _database; }
+        }
+
         public MongoRepository()
         {
             string environment = ConfigurationManager.AppSettings["environment"];
@@ -19,7 +24,8 @@ namespace MicropostMVC.Framework.Repository
             _server = MongoServer.Create(connection);
 
             string databaseName = ConfigurationManager.ConnectionStrings[environment].Name;
-            _database = _server.GetDatabase(databaseName);
+            SafeMode safeMode = SafeMode.Create(1, TimeSpan.FromSeconds(30)); // 30 second timeout
+            _database = _server.GetDatabase(databaseName, safeMode);
         }
 
         private MongoCollection GetCollection<T>()
@@ -30,8 +36,15 @@ namespace MicropostMVC.Framework.Repository
         public bool Save<T>(T item) where T : IBoBase
         {
             MongoCollection collection = GetCollection<T>();
-            SafeModeResult result = collection.Save(item, SafeMode.True);
-            return (result != null && result.Ok);
+            try
+            {
+                SafeModeResult result = collection.Save(item);
+                return (result != null && result.Ok);
+            } 
+            catch(MongoSafeModeException ex)
+            {
+                return false;
+            }
         }
 
         public T FindById<T>(BoRef id) where T : IBoBase
@@ -39,7 +52,15 @@ namespace MicropostMVC.Framework.Repository
             MongoCollection collection = GetCollection<T>();
             return collection.FindOneByIdAs<T>(ObjectIdConverter.ConvertBoRefToObjectId(id));
         }
-    
+
+        public T FindByKeyValue<T>(string key, object value) where T : IBoBase
+        {
+            BsonValue bsonValue = BsonValue.Create(value);
+            MongoCollection collection = GetCollection<T>();
+            IMongoQuery query = new QueryDocument(key, bsonValue);
+            return collection.FindOneAs<T>(query);
+        }
+
         public void Dispose()
         {
             _server.Disconnect();
