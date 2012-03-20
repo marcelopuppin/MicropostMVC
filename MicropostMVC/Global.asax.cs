@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Web;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using MicropostMVC.Framework.Common;
-using MicropostMVC.Framework.DependencyResolution;
-using MicropostMVC.Framework.Repository;
-using StructureMap;
+using MicropostMVC.Framework.Security;
 
 namespace MicropostMVC
 {
@@ -23,6 +14,7 @@ namespace MicropostMVC
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new CustomAuthentication());
         }
 
         public static void RegisterRoutes(RouteCollection routes)

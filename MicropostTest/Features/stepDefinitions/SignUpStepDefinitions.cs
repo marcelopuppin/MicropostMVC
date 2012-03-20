@@ -34,9 +34,9 @@ namespace MicropostTest.Features.stepDefinitions
         }
         
         [When(@"I click the '(.*)' button")]
-        public void WhenIClickTheCreateButton(string button)
+        public void WhenIClickTheCreateButton(string buttonName)
         {
-            WebBrowser.Current.Button("Create").Click();
+            WebBrowser.Current.Button(buttonName).Click();
         }
 
         [Then(@"the '(.*)' message contains '(.*)'")]

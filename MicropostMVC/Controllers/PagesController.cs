@@ -2,6 +2,7 @@
 
 namespace MicropostMVC.Controllers
 {
+    [AllowAnonymous]
     public class PagesController : Controller
     {
         //

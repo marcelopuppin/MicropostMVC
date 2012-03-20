@@ -160,6 +160,7 @@
     <Compile Include="BusinessServices\EncryptorBS.cs" />
     <Compile Include="BusinessServices\IHashSalt.cs" />
     <Compile Include="BusinessServices\IUserBS.cs" />
+    <Compile Include="Controllers\SessionsController.cs" />
     <Compile Include="Framework\Common\BoRef.cs" />
     <Compile Include="Framework\Common\ObjectIdConverter.cs" />
     <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Framework\Repository\IRepository.cs" />
     <Compile Include="Framework\Repository\MongoBo.cs" />
     <Compile Include="Framework\Repository\MongoRepository.cs" />
+    <Compile Include="Framework\Security\CustomAuthentication.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -298,7 +300,7 @@
     <Content Include="Views\Pages\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Users\SignIn.cshtml" />
+    <Content Include="Views\Sessions\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Users\SignUp.cshtml" />

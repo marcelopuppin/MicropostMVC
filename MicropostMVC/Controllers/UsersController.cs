@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Models;
 
@@ -13,18 +14,14 @@ namespace MicropostMVC.Controllers
             _userBS = userBS;
         }
 
-        public ActionResult SignIn()
-        {
-            return View();
-        }
-
-        [HttpGet]
+        
+        [HttpGet, AllowAnonymous]
         public ActionResult SignUp()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public ActionResult SignUp(UserModel user)
         {
             if (_userBS.IsEmailUsedBySomeone(user))
@@ -33,14 +30,15 @@ namespace MicropostMVC.Controllers
                 return View(user);
             }
             
-            UserModel newUser = _userBS.Save(user);
-            if (newUser.Id.IsEmpty()) 
+            UserModel userSaved = _userBS.Save(user);
+            if (userSaved.Id.IsEmpty()) 
             {
                 ModelState.AddModelError(string.Empty, "Sign up failure!");
                 return View(user);
             }
 
-            return View("Show", newUser);
+            _userBS.Authenticate(userSaved);
+            return RedirectToAction("Show", "Users", userSaved);
         }
 
         public ActionResult Show(UserModel user)

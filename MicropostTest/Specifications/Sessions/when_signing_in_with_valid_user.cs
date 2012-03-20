@@ -1,5 +1,4 @@
 using System.Web.Mvc;
-using System.Web.Security;
 using Machine.Specifications;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Controllers;
@@ -8,12 +7,12 @@ using MicropostMVC.Models;
 using Moq;
 using It = Machine.Specifications.It;
 
-namespace MicropostTest.Specifications.Users
+namespace MicropostTest.Specifications.Sessions
 {
-    [Subject(typeof(UsersController))]
-    public class when_signing_up_with_new_valid_user
+    [Subject(typeof(SessionsController))]
+    public class when_signing_in_with_valid_user
     {
-        private static UsersController controller;
+        private static SessionsController controller;
         private static ActionResult result;
         private static IUserBS userBS;
         private static UserModel user;
@@ -26,16 +25,15 @@ namespace MicropostTest.Specifications.Users
                                     
             var userBSMock = new Mock<IUserBS>();
             userBS = userBSMock.Object;
-            userBSMock.Setup(u => u.IsEmailUsedBySomeone(user)).Returns(false);
-            userBSMock.Setup(u => u.Save(user)).Returns(userSaved);
-            userBSMock.Setup(u => u.Authenticate(user));
+            userBSMock.Setup(u => u.Login(user)).Returns(userSaved);
+            userBSMock.Setup(u => u.Authenticate(userSaved));
 
-            controller = new UsersController(userBS);
+            controller = new SessionsController(userBS);
         };
 
         Because of = () =>
         {
-            result = controller.SignUp(user);
+            result = controller.SignIn(user);
         };
 
         It should_return_show_view = () =>

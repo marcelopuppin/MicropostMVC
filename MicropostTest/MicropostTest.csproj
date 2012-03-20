@@ -84,6 +84,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -98,6 +99,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\signin.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>signin.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\stepDefinitions\SignInStepDefinitions.cs" />
     <Compile Include="Features\stepDefinitions\PagesStepDefinitions.cs" />
     <Compile Include="Features\stepDefinitions\SignUpStepDefinitions.cs" />
     <Compile Include="Features\teardown\AccessingLinksAtTheRootPageFeature.cs" />
@@ -111,11 +118,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>signup.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\teardown\SigningInUsersFeature.cs" />
     <Compile Include="Features\teardown\SigningUpUsersFeature.cs" />
     <Compile Include="Features\teardown\TeardownFeature.cs" />
     <Compile Include="Features\WebBrowser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecFlowNUnitExtension.cs" />
+    <Compile Include="Specifications\Sessions\when_signing_in_with_invalid_user.cs" />
+    <Compile Include="Specifications\Sessions\when_signing_in_with_valid_user.cs" />
+    <Compile Include="Specifications\Sessions\when_signin_action_is_invoked.cs" />
     <Compile Include="Specifications\Pages\when_about_action_is_invoked.cs" />
     <Compile Include="Specifications\Pages\when_contact_action_is_invoked.cs" />
     <Compile Include="Specifications\Pages\when_help_action_is_invoked.cs" />
@@ -132,6 +143,10 @@
     <None Include="Features\pages.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>pages.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\signin.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>signin.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\signup.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

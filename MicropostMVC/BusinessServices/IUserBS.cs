@@ -8,5 +8,7 @@ namespace MicropostMVC.BusinessServices
     {
         UserModel Save(UserModel user);
         bool IsEmailUsedBySomeone(UserModel user);
+        UserModel Login(UserModel user);
+        void Authenticate(UserModel user);
     }
 }

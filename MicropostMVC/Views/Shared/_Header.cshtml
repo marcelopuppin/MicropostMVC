@@ -3,7 +3,14 @@
     <ul>
     <li>@Html.ActionLink("Home", "Home", "Pages")</li>
     <li>@Html.ActionLink("Help", "Help", "Pages")</li>
-    <li>@Html.ActionLink("Sign in", "SignIn", "Users")</li>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li>@Html.ActionLink("Sign out", "SignOut", "Sessions")</li>
+    }
+    else 
+    {
+        <li>@Html.ActionLink("Sign in", "SignIn", "Sessions")</li>
+    }
     </ul>
 </nav>
       

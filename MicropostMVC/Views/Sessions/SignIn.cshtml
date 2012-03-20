@@ -1,26 +1,19 @@
 ﻿@model MicropostMVC.Models.UserModel
 
 @{
-    ViewBag.Title = "Sign up";
+    ViewBag.Title = "Sign in";
 }
 
-<h2>Sign up</h2>
+<h2>Sign in</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
-                                      
-    <fieldset class="round">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
 
+    <fieldset class="round">
         <div class="editor-label">
             @Html.LabelFor(model => model.Email)
         </div>
@@ -36,17 +29,13 @@
             @Html.EditorFor(model => model.Password, "password")
             @Html.ValidationMessageFor(model => model.Password)
         </div>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PasswordConfirmation)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PasswordConfirmation, "password")
-            @Html.ValidationMessageFor(model => model.PasswordConfirmation)
-        </div>
+
         <p>
-            <input type="submit" id="Create" value="Create" />
+            <input type="submit" id="SignIn" value="Sign in" />
+        </p>
+        
+        <p>
+            New user? @Html.ActionLink("Sign up now!", "SignUp", "Users")
         </p>
     </fieldset>
 }
-
