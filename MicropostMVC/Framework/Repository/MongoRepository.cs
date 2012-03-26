@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using MicropostMVC.Framework.Common;
 using MongoDB.Bson;
@@ -41,7 +42,7 @@ namespace MicropostMVC.Framework.Repository
                 SafeModeResult result = collection.Save(item);
                 return (result != null && result.Ok);
             } 
-            catch(MongoSafeModeException ex)
+            catch(MongoSafeModeException)
             {
                 return false;
             }
@@ -59,6 +60,14 @@ namespace MicropostMVC.Framework.Repository
             MongoCollection collection = GetCollection<T>();
             IMongoQuery query = new QueryDocument(key, bsonValue);
             return collection.FindOneAs<T>(query);
+        }
+
+        public IEnumerable<T> FindAll<T>()
+        {
+            MongoCollection collection = GetCollection<T>();
+            var list = new List<T>();
+            list.AddRange(collection.FindAllAs<T>());
+            return list;
         }
 
         public void Dispose()

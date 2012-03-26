@@ -4,6 +4,22 @@
     ViewBag.Title = "Show";
 }
 
-<h2>@Html.DisplayFor(model => model.Name)</h2>
-
 @Html.HiddenFor(model => model.Id)
+
+<table class="profile" summary="Profile information">
+  <tr>
+    <td class="main">
+        <h1>
+            @{
+                Html.RenderPartial("Avatar");
+            }
+            @Html.DisplayFor(model => model.Name)
+        </h1>
+    </td>
+    <td class="sidebar round">
+        <strong>Name:</strong>&nbsp;@Html.DisplayFor(model => model.Name)
+        <br />
+        <strong>Email:</strong>&nbsp;@Html.DisplayFor(model => model.Email)
+    </td>
+  </tr>
+</table>

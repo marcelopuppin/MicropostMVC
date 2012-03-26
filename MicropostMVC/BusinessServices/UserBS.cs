@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.Web.Security;
 using AutoMapper;
 using MicropostMVC.BusinessObjects;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.Repository;
-using MongoDB.Bson;
+using System.Linq;
 
 namespace MicropostMVC.Models
 {
@@ -62,6 +63,12 @@ namespace MicropostMVC.Models
         public void Authenticate(UserModel user)
         {
             FormsAuthentication.SetAuthCookie(user.Id.Value, false);
+        }
+
+        public IEnumerable<UserModel> GetUsers()
+        {
+            IEnumerable<UserBo> userBos = _repository.FindAll<UserBo>();
+            return userBos.Select(Mapper.Map<UserBo, UserModel>);
         }
     }
 }

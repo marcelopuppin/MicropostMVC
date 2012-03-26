@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 using System.Web.Security;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Models;
@@ -41,9 +43,36 @@ namespace MicropostMVC.Controllers
             return RedirectToAction("Show", "Users", userSaved);
         }
 
+        public ActionResult Index()
+        {
+            if (!Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            
+            string search = Request.Params["search"].Trim().ToLower();
+            if (search == "")
+            {
+                return PartialView("Users");
+            }
+            
+            IEnumerable<UserModel> users = _userBS.GetUsers();
+            if (search != "*")
+            {
+                users = users.Where(u => u.Name.ToLower().Contains(search));
+            }
+            return PartialView("Users", users);
+        }
+
         public ActionResult Show(UserModel user)
         {
             return View(user);
+        }
+
+        public static string GetAvatarPath(UserModel user)
+        {
+            var avatarImage = (user.Id != null) ? string.Format("{0}.png", user.Id.Value) : "noavatar.png";
+            return "~/Content/images/avatars/" + avatarImage;
         }
     }
 }

@@ -41,7 +41,14 @@ namespace MicropostMVC
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
+            //var coffeeBundle = new DynamicFolderBundle("coffee", new CoffeeCompiler(), "*.coffee"); 
+            //BundleTable.Bundles.Add(coffeeBundle);
+
+            //var rxBundle = new DynamicFolderBundle("rx", "rx*.js");
+            //BundleTable.Bundles.Add(rxBundle);
+
             BundleTable.Bundles.RegisterTemplateBundles();
+            //BundleTable.Bundles.EnableDefaultBundles();
         }
     }
 }

@@ -38,6 +38,10 @@ textarea {
     margin: 0.5em 0 0 0;
 }
 
+.block-area {
+    margin: 0.5em 0 0 0;
+    min-height: 100px;    
+}
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
@@ -85,6 +89,10 @@ ul.validation-summary-errors {
     padding:0; 
     border-top:none; 
     } 
+
+.validation-summary-errors li {
+  list-style: none;
+}
 
 /* Microposts MVC 
 -----------------------------------------------------------*/
@@ -200,4 +208,47 @@ footer {
 
 footer nav {
   float: none;
+}
+
+/* User show page */
+
+table.profile {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+td.main {
+  width: 70%;
+  padding: 1em;
+}
+
+td.sidebar {
+  width: 30%;
+  padding: 1em;
+  vertical-align: top;
+  background: #ffc;
+}
+
+img.avatar {
+  border: 1px solid #999;
+  margin-bottom: -15px;
+  width: 75px;
+  height: 75px;
+}
+
+img.avatar-small {
+  border: 1px solid #999;
+  margin-bottom: -5px;
+  width: 30px;
+  height: 30px;
+}
+
+ul.users {
+  margin-top: 1em;
+}
+
+.users li 
+{
+  padding-bottom: 5px;
+  list-style: none;
 }

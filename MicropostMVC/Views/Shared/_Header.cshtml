@@ -5,6 +5,7 @@
     <li>@Html.ActionLink("Help", "Help", "Pages")</li>
     @if (User.Identity.IsAuthenticated)
     {
+        <li>@Html.ActionLink("Users", "Index", "Users")</li>
         <li>@Html.ActionLink("Sign out", "SignOut", "Sessions")</li>
     }
     else 
