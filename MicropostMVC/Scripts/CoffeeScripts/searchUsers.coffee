@@ -1,4 +1,4 @@
-﻿jQuery ->	
+jQuery ->	
 
 	# observe text as it is entered into the search box	
 	input = $('#searchUsers')		
@@ -11,7 +11,7 @@
 	results = (query) -> 		
 		$.ajaxAsObservable(			
 			url: '/Users/Index',			
-			data: { q: query }		
+			data: { search: query }		
 			)		
 		 .select((r) -> r.data)	
 		 

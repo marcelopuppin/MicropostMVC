@@ -1,0 +1,25 @@
+﻿@{
+    if (ViewBag.FlashMessage == null)
+    {
+        ViewBag.FlashMessage = "";
+    }
+    if (ViewBag.FlashClass == null)
+    {
+        ViewBag.FlashClass = "info";
+    }
+}
+<script type="text/javascript">
+    $(window).ready(function () {
+        $("#flash").append("@ViewBag.FlashMessage")
+                   .hide();
+        var visible = (@ViewBag.FlashMessage.Length > 0);
+        if (visible) {
+            $("#flash").fadeIn(3000);  
+        }
+    });
+</script>
+
+<!-- flash class: error, alert, notice, success, info -->
+<div id="flash" class="@ViewBag.FlashClass">
+    
+</div>

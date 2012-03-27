@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Web.Security;
 using AutoMapper;
@@ -65,10 +66,17 @@ namespace MicropostMVC.Models
             FormsAuthentication.SetAuthCookie(user.Id.Value, false);
         }
 
-        public IEnumerable<UserModel> GetUsers()
+        public UserModel GetUser(BoRef id)
         {
-            IEnumerable<UserBo> userBos = _repository.FindAll<UserBo>();
-            return userBos.Select(Mapper.Map<UserBo, UserModel>);
+            var userBo = _repository.FindById<UserBo>(id);
+            return Mapper.Map<UserBo, UserModel>(userBo);
+        }
+
+        public IEnumerable<UserModel> GetUsers(int skip, int take)
+        {
+            IEnumerable<UserBo> userBos = _repository.FindAll<UserBo>(skip, take);
+            return userBos.Select(Mapper.Map<UserBo, UserModel>)
+                          .OrderBy(u => u.Name);
         }
     }
 }

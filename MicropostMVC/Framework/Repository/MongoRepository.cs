@@ -62,11 +62,16 @@ namespace MicropostMVC.Framework.Repository
             return collection.FindOneAs<T>(query);
         }
 
-        public IEnumerable<T> FindAll<T>()
+        public IEnumerable<T> FindAll<T>(int skip = 0, int take = int.MaxValue) where T : IBoBase
         {
             MongoCollection collection = GetCollection<T>();
+            MongoCursor<T> cursor = collection.FindAllAs<T>();
+            cursor.SetSkip(skip);
+            cursor.SetLimit(take);
+            cursor.SetMaxScan(take);
+            
             var list = new List<T>();
-            list.AddRange(collection.FindAllAs<T>());
+            list.AddRange(cursor);
             return list;
         }
 

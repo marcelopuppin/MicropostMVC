@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<MicropostMVC.Models.UserModel>
 
 <ul class="users">
-    @if (Model != null)
+@if (Model != null)
+{
+    foreach (var user in Model)
     {
-        foreach (var item in Model)
-        {
-            <li>
-                @{
-                    var data = new ViewDataDictionary {new KeyValuePair<string, object>("class", "avatar-small")};
-                    Html.RenderPartial("Avatar", item, data);
-                }
-                @Html.ActionLink(item.Name, "Show", item)
-            </li>
+    <li>
+        @{
+            var data = new ViewDataDictionary {new KeyValuePair<string, object>("class", "avatar-small")};
+            Html.RenderPartial("Avatar", user, data);
         }
+        @Html.ActionLink(user.Name, "Show", new { id = user.Id.Value })
+    </li>
     }
+}
 </ul>

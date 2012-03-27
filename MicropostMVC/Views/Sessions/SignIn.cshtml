@@ -9,10 +9,12 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
+@{
+    Html.RenderPartial("_Message");    
+}
+
 @using (Html.BeginForm())
 {
-    @Html.ValidationSummary(true)
-
     <fieldset class="round">
         <div class="editor-label">
             @Html.LabelFor(model => model.Email)
@@ -31,7 +33,7 @@
         </div>
 
         <p>
-            <input type="submit" id="SignIn" value="Sign in"/>
+            <input type="submit" class="button large blue" id="SignIn" value="Sign in"/>
         </p>
         
         <p>

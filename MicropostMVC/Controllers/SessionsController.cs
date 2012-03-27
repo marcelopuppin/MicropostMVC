@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
 using MicropostMVC.BusinessServices;
+using MicropostMVC.Framework.Security;
 using MicropostMVC.Models;
 
 namespace MicropostMVC.Controllers
@@ -17,6 +19,13 @@ namespace MicropostMVC.Controllers
         [HttpGet, AllowAnonymous]
         public ActionResult SignIn()
         {
+            string returnUrl = Request.Params[CustomAuthentication.RedirectKey];
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                ViewBag.FlashMessage = "Please sign in to access this page.";
+                ViewBag.FlashClass = "notice";
+                TempData.Add(CustomAuthentication.RedirectKey, returnUrl);
+            }
             return View();
         }
 
@@ -26,12 +35,18 @@ namespace MicropostMVC.Controllers
             UserModel userLogged = _userBS.Login(user);
             if (userLogged.Id.IsEmpty())
             {
-                ModelState.AddModelError(string.Empty, "Email/Password combination is invalid!");
+                ViewBag.FlashMessage = "Invalid email/password combination.";
+                ViewBag.FlashClass = "error";
                 return View(user);
             }
             
             _userBS.Authenticate(userLogged);
-            return RedirectToAction("Show", "Users", userLogged);
+
+            if (TempData.ContainsKey(CustomAuthentication.RedirectKey))
+            {
+                return Redirect(TempData[CustomAuthentication.RedirectKey].ToString());
+            }
+            return RedirectToAction("Show", "Users", new { id = userLogged.Id.Value });
         }
 
         public ActionResult SignOut()

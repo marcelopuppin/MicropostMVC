@@ -5,6 +5,11 @@ namespace MicropostMVC.Framework.Security
 {
     public class CustomAuthentication : ActionFilterAttribute
     {
+        public static string RedirectKey
+        {
+            get { return "RedirectUrl"; }
+        }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             bool allowAnonymous = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true) ||
@@ -20,8 +25,15 @@ namespace MicropostMVC.Framework.Security
                     filterContext.HttpContext.Request.Url.AbsolutePath != loginUrl)
                 {
                     string redirectOnSuccess = filterContext.HttpContext.Request.Url.AbsolutePath;
-                    loginUrl += string.Format("?ReturnUrl={0}", redirectOnSuccess);
-                    filterContext.HttpContext.Response.Redirect(loginUrl, true);
+                    loginUrl += string.Format("?{0}={1}", RedirectKey, redirectOnSuccess);
+                    if (filterContext.HttpContext.Request.IsAjaxRequest())
+                    {
+                        filterContext.HttpContext.Response.RedirectLocation = string.Empty;
+                    }
+                    else
+                    {
+                        filterContext.HttpContext.Response.Redirect(loginUrl, true);
+                    }
                 }
             }
 

@@ -51,6 +51,12 @@ textarea {
     font-size: small;
 }
 
+span.field-validation-error
+{
+    float: right;
+    width: 450px;
+}
+
 .field-validation-valid {
     display: none;
 }
@@ -184,7 +190,7 @@ a.signup_button {
   text-align: center;
   width: 190px;
   color: white;
-  background: #006400;
+  background: #2981e4;
   font-size: 150%;
   font-weight: bold;
   padding: 20px;
@@ -245,6 +251,7 @@ img.avatar-small {
 
 ul.users {
   margin-top: 1em;
+  margin-left: -1em;
 }
 
 .users li 
@@ -252,3 +259,55 @@ ul.users {
   padding-bottom: 5px;
   list-style: none;
 }
+
+/* Blueprint */
+
+.error, .alert, .notice, .success, .info {padding:0.8em;margin-bottom:1em;border:2px solid #ddd;}
+.error, .alert {background:#fbe3e4;color:#8a1f11;border-color:#fbc2c4;}
+.notice {background:#fff6bf;color:#514721;border-color:#ffd324;}
+.success {background:#e6efc2;color:#264409;border-color:#c6d880;}
+.info {background:#d5edf8;color:#205791;border-color:#92cae4;}
+.error a, .alert a {color:#8a1f11;}
+.notice a {color:#514721;}
+.success a {color:#264409;}
+.info a {color:#205791;}
+
+/* Button */
+.button, .button:visited {
+    display: block;
+    background: none;
+	padding: 5px 10px 6px; 
+	color: #fff; 
+	text-decoration: none;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+    border: none;
+    position: relative;
+	cursor: pointer
+}
+ 
+	.button:hover							{ background-color: #111; color: #fff; }
+	.button:active							{ top: 1px; }
+	.small.button, .small.button:visited 	{ font-size: 11px}
+	.button, .button:visited,
+	.medium.button, .medium.button:visited 	{ font-size: 13px; 
+											  font-weight: bold; 
+											  line-height: 1;  }
+												  
+	.large.button, .large.button:visited 	{ font-size: 14px; 
+											  padding: 8px 14px 9px; }
+													  
+	.super.button, .super.button:visited 	{ font-size: 34px; 
+											  padding: 8px 14px 9px; }
+	
+	.green.button, .green.button:visited	{ background-color: #91bd09; }
+	.green.button:hover						{ background-color: #749a02; }
+	.red.button, .red.button:visited		{ background-color: #e62727; }
+	.red.button:hover						{ background-color: #cf2525; }
+	.orange.button, .orange.button:visited	{ background-color: #ff5c00; }
+	.orange.button:hover					{ background-color: #d45500; }
+	.blue.button, .blue.button:visited		{ background-color: #2981e4; }
+	.blue.button:hover						{ background-color: #2575cf; }
+	.yellow.button, .yellow.button:visited	{ background-color: #ffb515; }
+	.yellow.button:hover					{ background-color: #fc9200; }

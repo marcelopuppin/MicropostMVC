@@ -2,16 +2,16 @@
 
 @{
     ViewBag.Title = "Show";
+    Html.RenderPartial("_Message");
+    Html.HiddenFor(model => model.Id);
 }
-
-@Html.HiddenFor(model => model.Id)
 
 <table class="profile" summary="Profile information">
   <tr>
     <td class="main">
         <h1>
             @{
-                Html.RenderPartial("Avatar");
+                Html.RenderPartial("Avatar", Model);
             }
             @Html.DisplayFor(model => model.Name)
         </h1>

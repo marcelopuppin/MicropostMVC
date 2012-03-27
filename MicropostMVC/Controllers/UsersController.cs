@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
 using MicropostMVC.BusinessServices;
+using MicropostMVC.Framework.Common;
 using MicropostMVC.Models;
 
 namespace MicropostMVC.Controllers
@@ -15,7 +18,6 @@ namespace MicropostMVC.Controllers
         {
             _userBS = userBS;
         }
-
         
         [HttpGet, AllowAnonymous]
         public ActionResult SignUp()
@@ -28,7 +30,8 @@ namespace MicropostMVC.Controllers
         {
             if (_userBS.IsEmailUsedBySomeone(user))
             {
-                ModelState.AddModelError(string.Empty, "Email is already used by someone!");
+                ViewBag.FlashMessage = "Email is already used by someone.";
+                ViewBag.FlashClass = "alert";
                 return View(user);
             }
             
@@ -40,7 +43,7 @@ namespace MicropostMVC.Controllers
             }
 
             _userBS.Authenticate(userSaved);
-            return RedirectToAction("Show", "Users", userSaved);
+            return RedirectToAction("Show", "Users", new { id = userSaved.Id.Value, isNewUser = true });
         }
 
         public ActionResult Index()
@@ -56,7 +59,7 @@ namespace MicropostMVC.Controllers
                 return PartialView("Users");
             }
             
-            IEnumerable<UserModel> users = _userBS.GetUsers();
+            IEnumerable<UserModel> users = _userBS.GetUsers(0, int.MaxValue); //TODO: Users per page
             if (search != "*")
             {
                 users = users.Where(u => u.Name.ToLower().Contains(search));
@@ -64,14 +67,22 @@ namespace MicropostMVC.Controllers
             return PartialView("Users", users);
         }
 
-        public ActionResult Show(UserModel user)
+        public ActionResult Show(string id, bool isNewUser = false)
         {
+            ViewBag.FlashMessage = (isNewUser) ? "Welcome to the Sample App!" : string.Empty;
+            ViewBag.FlashClass = "success";
+            UserModel user = _userBS.GetUser(new BoRef(id));
             return View(user);
         }
 
         public static string GetAvatarPath(UserModel user)
         {
-            var avatarImage = (user.Id != null) ? string.Format("{0}.png", user.Id.Value) : "noavatar.png";
+            int number = 0;
+            if (!user.Id.IsEmpty())
+            {
+                int.TryParse(user.Id.Value.Last().ToString(CultureInfo.InvariantCulture), out number);
+            }
+            var avatarImage = (number > 0) ? string.Format("avatar{0}.png", number) : "noavatar.png";
             return "~/Content/images/avatars/" + avatarImage;
         }
     }

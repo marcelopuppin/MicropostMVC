@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.DependencyResolution;
 using MicropostMVC.Models;
 
@@ -11,6 +13,7 @@ namespace MicropostMVC.BusinessServices
         bool IsEmailUsedBySomeone(UserModel user);
         UserModel Login(UserModel user);
         void Authenticate(UserModel user);
-        IEnumerable<UserModel> GetUsers();
+        UserModel GetUser(BoRef id);
+        IEnumerable<UserModel> GetUsers(int skip, int take);
     }
 }

@@ -136,6 +136,7 @@
     <Compile Include="Specifications\Users\when_signing_up_user_with_email_used_by_someone.cs" />
     <Compile Include="UnitTests\Framework\EncryptorTest.cs" />
     <Compile Include="UnitTests\Mapping\UserMappingTest.cs" />
+    <Compile Include="UnitTests\Repositories\Populator.cs" />
     <Compile Include="UnitTests\Repositories\UserRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
