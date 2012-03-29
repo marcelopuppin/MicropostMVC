@@ -8,7 +8,7 @@
     <li>
         @{
             var data = new ViewDataDictionary {new KeyValuePair<string, object>("class", "avatar-small")};
-            Html.RenderPartial("Avatar", user, data);
+            Html.RenderPartial("_Avatar", user, data);
         }
         @Html.ActionLink(user.Name, "Show", new { id = user.Id.Value })
     </li>

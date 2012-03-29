@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using DataAnnotationsExtensions;
 using MicropostMVC.Framework.Common;
@@ -7,6 +8,11 @@ namespace MicropostMVC.Models
 {
     public class UserModel
     {
+        public UserModel()
+        {
+            Microposts = new List<MicropostModel>();    
+        }
+
         [Required, HiddenInput(DisplayValue = false)]
         public BoRef Id { get; set; }
 
@@ -24,5 +30,6 @@ namespace MicropostMVC.Models
          Display(Name = "Confirmation")]
         public string PasswordConfirmation { get; set; }
 
+        public List<MicropostModel> Microposts { get; set; }
     }
 }

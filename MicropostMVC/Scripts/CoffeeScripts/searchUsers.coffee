@@ -1,4 +1,4 @@
-jQuery ->	
+jQuery ->
 
 	# observe text as it is entered into the search box	
 	input = $('#searchUsers')		
@@ -10,9 +10,8 @@ jQuery ->
 	# define an ajax request to get the search results	
 	results = (query) -> 		
 		$.ajaxAsObservable(			
-			url: '/Users/Index',			
-			data: { search: query }		
-			)		
+			url: 'Index',			
+			data: { search: query }	)
 		 .select((r) -> r.data)	
 		 
 	# bind the input text to the search service	

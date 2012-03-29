@@ -1,12 +1,13 @@
 ﻿@using MicropostMVC.Models
+@using MicropostMVC.Controllers
 @model UserModel
 
 @{
-    var avatarPath = MicropostMVC.Controllers.UsersController.GetAvatarPath(Model);
+    var avatarPath = UsersController.GetAvatarPath(Model);
     string filePath = Request.MapPath(avatarPath);
     if (!File.Exists(filePath))
     {
-        avatarPath = MicropostMVC.Controllers.UsersController.GetAvatarPath(new UserModel());
+        avatarPath = UsersController.GetAvatarPath(new UserModel());
     }
 
     string classValue = "avatar";

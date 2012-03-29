@@ -19,21 +19,24 @@ namespace MicropostMVC.App_Start {
                 .ForMember(dest => dest.Id,
                            opt => opt.ResolveUsing(src => ObjectIdConverter.ConvertBoRefToObjectId(src.Id)))
                 .ForMember(dest => dest.PasswordHash,
-                           opt => opt.ResolveUsing(src => {
-                                  var encryptorBS = DependencyResolver.Current.GetService<IEncryptorBS>();
-                                  return encryptorBS.GetStoredPasswordHash(src.Id);
+                           opt => opt.ResolveUsing(src =>
+                           {
+                               var encryptorBS = DependencyResolver.Current.GetService<IEncryptorBS>();
+                               return encryptorBS.GetStoredPasswordHash(src.Id);
                            }))
-                .ForMember(dest => dest.PasswordSalt, 
-                           opt => opt.ResolveUsing(src => {
-                                  var encryptorBS = DependencyResolver.Current.GetService<IEncryptorBS>();
-                                  return encryptorBS.GetStoredPasswordSalt(src.Id);
+                .ForMember(dest => dest.PasswordSalt,
+                           opt => opt.ResolveUsing(src =>
+                           {
+                               var encryptorBS = DependencyResolver.Current.GetService<IEncryptorBS>();
+                               return encryptorBS.GetStoredPasswordSalt(src.Id);
                            }));
-
+                 
             Mapper.CreateMap<UserBo, UserModel>()
                 .ForMember(dest => dest.Id,
                            opt => opt.ResolveUsing(src => ObjectIdConverter.ConvertObjectIdToBoRef(src.Id)))
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
-                .ForMember(dest => dest.PasswordConfirmation, opt => opt.Ignore());
+                .ForMember(dest => dest.PasswordConfirmation, opt => opt.Ignore())
+                .ForMember(dest => dest.Microposts, opt => opt.Ignore());
 
             Mapper.AssertConfigurationIsValid();
         }

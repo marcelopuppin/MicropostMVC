@@ -1,16 +1,15 @@
 ﻿using System.Web.Mvc;
+using MicropostMVC.Framework.Common;
+using MicropostMVC.Models;
 
 namespace MicropostMVC.Controllers
 {
     [AllowAnonymous]
     public class PagesController : Controller
     {
-        //
-        // GET: /Home/
-
         public ActionResult Home()
         {
-           return View();
+            return View();
         }
 
         public ActionResult Help()

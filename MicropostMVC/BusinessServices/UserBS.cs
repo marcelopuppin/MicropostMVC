@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Web.Security;
 using AutoMapper;
 using MicropostMVC.BusinessObjects;
-using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.Repository;
 using System.Linq;
+using MicropostMVC.Models;
 
-namespace MicropostMVC.Models
+namespace MicropostMVC.BusinessServices
 {
     public class UserBS : IUserBS {
         private readonly IRepository _repository;

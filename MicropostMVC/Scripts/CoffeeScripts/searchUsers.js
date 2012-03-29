@@ -7,7 +7,7 @@
     }).throttle(250).distinctUntilChanged();
     results = function(query) {
       return $.ajaxAsObservable({
-        url: '/Users/Index',
+        url: 'Index',
         data: {
           search: query
         }

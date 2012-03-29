@@ -1,0 +1,18 @@
+﻿@{
+    Html.RenderPartial("_Message");    
+}
+
+@using (Html.BeginForm("Create","Microposts"))
+{
+    <fieldset class="round">
+    
+        <div class="micropost_new">
+            @Html.TextArea("micropostNew")
+        </div>
+
+        <p>
+            <input type="submit" class="button large blue" id="Submit" value="Submit"/>
+        </p>
+
+    </fieldset>
+}

@@ -151,6 +151,7 @@
     <Compile Include="BusinessServices\EncryptorBS.cs" />
     <Compile Include="BusinessServices\IHashSalt.cs" />
     <Compile Include="BusinessServices\IUserBS.cs" />
+    <Compile Include="Controllers\MicropostsController.cs" />
     <Compile Include="Controllers\SessionsController.cs" />
     <Compile Include="Framework\Common\BoRef.cs" />
     <Compile Include="Framework\Common\ObjectIdConverter.cs" />
@@ -174,6 +175,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="BusinessServices\UserBS.cs" />
+    <Compile Include="Models\MicropostModel.cs" />
+    <Compile Include="Models\MicropostOwnerModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -316,14 +319,16 @@
     <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Users\Avatar.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Users\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\CoffeeScripts\searchUsers.coffee" />
     <Content Include="Views\Shared\_Message.cshtml" />
+    <Content Include="Views\Shared\_Avatar.cshtml" />
+    <Content Include="Views\Shared\_UserInfo.cshtml" />
+    <Content Include="Views\Shared\_MicropostNew.cshtml" />
+    <Content Include="Views\Microposts\Index.cshtml" />
+    <Content Include="Views\Microposts\Micropost.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

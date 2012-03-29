@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Security;
@@ -41,10 +40,12 @@ namespace MicropostMVC.Controllers
             }
             
             _userBS.Authenticate(userLogged);
-
+            
             if (TempData.ContainsKey(CustomAuthentication.RedirectKey))
             {
-                return Redirect(TempData[CustomAuthentication.RedirectKey].ToString());
+                string returnUrl = TempData[CustomAuthentication.RedirectKey].ToString();
+                TempData.Remove(CustomAuthentication.RedirectKey);
+                return Redirect(returnUrl);
             }
             return RedirectToAction("Show", "Users", new { id = userLogged.Id.Value });
         }

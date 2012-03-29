@@ -1,0 +1,28 @@
+﻿@using MicropostMVC.Models
+@model UserModel
+@{
+    ViewBag.Title = "Home";
+}
+<table class="profile">
+    <tr>
+        <td class="main">
+            <h1 class="micropost">What's up?</h1>
+            @{
+                Html.RenderPartial("_MicropostNew");
+            } 
+        </td>
+        <td class="sidebar round">
+           @{
+                Html.RenderPartial("_UserInfo", Model);
+            } 
+        </td>
+    </tr>
+</table>
+
+<table class="microposts">
+    @foreach (MicropostModel micropost in Model.Microposts)
+     {
+        var micropostOwner = new MicropostOwnerModel {Owner = Model, Micropost = micropost};
+        Html.RenderPartial("Micropost", micropostOwner);
+     }
+</table>

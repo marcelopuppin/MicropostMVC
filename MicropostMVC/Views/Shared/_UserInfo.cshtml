@@ -1,0 +1,11 @@
+﻿@model MicropostMVC.Models.UserModel
+
+<div class="user_info">
+  @{
+      var data = new ViewDataDictionary {new KeyValuePair<string, object>("class", "avatar-small")};
+      Html.RenderPartial("_Avatar", Model, data);
+  }
+  <span class="user_name">@Model.Name</span>
+  <span class="microposts">Micropost(s) 0</span>
+</div>
+
