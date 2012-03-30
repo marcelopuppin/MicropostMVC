@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Common;
@@ -9,12 +10,14 @@ namespace MicropostMVC.Controllers
     public class MicropostsController : Controller
     {
         private readonly IUserBS _userBS;
+        private readonly IMicropostBS _micropostBS;
 
-        public MicropostsController(IUserBS userBS)
+        public MicropostsController(IUserBS userBS, IMicropostBS micropostBS)
         {
             _userBS = userBS;
+            _micropostBS = micropostBS;
         }
-        
+
         public ActionResult Index()
         {
             return View(GetUserModelForAuthenticatedUser());
@@ -23,19 +26,45 @@ namespace MicropostMVC.Controllers
         [HttpPost]
         public ActionResult Create()
         {
-            string newMicropost = Request.Params["micropostNew"];
+            string content = Request.Params["micropostNew"];
             
-            bool isEmpty = string.IsNullOrEmpty(newMicropost);
+            bool isEmpty = string.IsNullOrEmpty(content);
             ViewBag.FlashMessage = (isEmpty) ? "Micropost cannot be blank!" : "Micropost created!";
             ViewBag.FlashClass = (isEmpty) ? "error" : "success";
 
             UserModel user = GetUserModelForAuthenticatedUser();
             if (!isEmpty)
             {
-                user.Microposts.Add(new MicropostModel {Content = newMicropost, CreatedAt = DateTime.Now});
+                bool saved = _micropostBS.Save(user, content);        
+                if (!saved)
+                {
+                    ViewBag.FlashMessage = "Micropost could not be created!";
+                    ViewBag.FlashClass = "error";
+                } 
+                else
+                {
+                    user = _userBS.GetUser(user.Id); 
+                } 
             }
-            user.Microposts.Add(new MicropostModel { Content = "aaaaaaaaaa", CreatedAt = DateTime.Now.AddHours(-1) });
 
+            return View("Index", user);
+        }
+
+        [HttpPost]
+        public ActionResult Remove(string userId, string micropostId)
+        {
+            UserModel user = _userBS.GetUser(new BoRef(userId));
+            if (!user.Id.IsEmpty())
+            {
+                bool deleted = _micropostBS.Delete(user, new BoRef(micropostId));
+                if (deleted)
+                {
+                    return View("Index", user); 
+                }
+            }
+            
+            ViewBag.FlashMessage = "Micropost could not be deleted!";
+            ViewBag.FlashClass = "error";
             return View("Index", user);
         }
 

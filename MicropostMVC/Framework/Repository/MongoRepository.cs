@@ -48,6 +48,14 @@ namespace MicropostMVC.Framework.Repository
             }
         }
 
+        public bool Remove<T>(BoRef id) where T : IBoBase
+        {
+            MongoCollection collection = GetCollection<T>();
+            IMongoQuery query = new QueryDocument("Id", ObjectIdConverter.ConvertBoRefToObjectId(id));
+            SafeModeResult result = collection.Remove(query);
+            return (result != null && result.Ok);
+        }
+
         public T FindById<T>(BoRef id) where T : IBoBase
         {
             MongoCollection collection = GetCollection<T>();

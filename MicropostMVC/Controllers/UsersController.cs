@@ -36,7 +36,8 @@ namespace MicropostMVC.Controllers
             UserModel userSaved = _userBS.Save(user);
             if (userSaved.Id.IsEmpty()) 
             {
-                ModelState.AddModelError(string.Empty, "Sign up failure!");
+                ViewBag.FlashMessage = "Sign up failure!";
+                ViewBag.FlashClass = "error";
                 return View(user);
             }
 

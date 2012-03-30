@@ -2,6 +2,7 @@
 @model UserModel
 @{
     ViewBag.Title = "Home";
+    Html.RenderPartial("_MicropostDelete");
 }
 <table class="profile">
     <tr>
@@ -23,6 +24,6 @@
     @foreach (MicropostModel micropost in Model.Microposts)
      {
         var micropostOwner = new MicropostOwnerModel {Owner = Model, Micropost = micropost};
-        Html.RenderPartial("Micropost", micropostOwner);
+        Html.RenderPartial("_Micropost", micropostOwner);
      }
 </table>

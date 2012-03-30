@@ -1,25 +1,35 @@
-﻿@model MicropostMVC.Models.UserModel
+﻿@using MicropostMVC.Models
+@model MicropostMVC.Models.UserModel
 
 @{
     ViewBag.Title = "Show";
     Html.RenderPartial("_Message");
+    Html.RenderPartial("_MicropostDelete");
     Html.HiddenFor(model => model.Id);
 }
 
 <table class="profile" summary="Profile information">
-  <tr>
-    <td class="main">
-        <h1>
-            @{
-                Html.RenderPartial("_Avatar", Model);
-            }
-            @Html.DisplayFor(model => model.Name)
-        </h1>
-    </td>
-    <td class="sidebar round">
-        <strong>Name:</strong>&nbsp;@Html.DisplayFor(model => model.Name)
-        <br />
-        <strong>Email:</strong>&nbsp;@Html.DisplayFor(model => model.Email)
-    </td>
-  </tr>
+    <tr>
+        <td class="main">
+            <h1>
+                @{
+                    Html.RenderPartial("_Avatar", Model);
+                }
+                @Html.DisplayFor(model => model.Name)
+            </h1>
+        </td>
+        <td class="sidebar round">
+            <strong>Name:</strong>&nbsp;@Html.DisplayFor(model => model.Name)
+            <br />
+            <strong>Email:</strong>&nbsp;@Html.DisplayFor(model => model.Email)
+        </td>
+    </tr>
+</table>
+
+<table class="microposts">
+    @foreach (MicropostModel micropost in Model.Microposts)
+     {
+        var micropostOwner = new MicropostOwnerModel {Owner = Model, Micropost = micropost};
+        Html.RenderPartial("_Micropost", micropostOwner);
+     }
 </table>

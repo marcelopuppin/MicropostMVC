@@ -1,20 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 using DataAnnotationsExtensions;
-using MicropostMVC.Framework.Common;
 
 namespace MicropostMVC.Models
 {
-    public class UserModel
+    public class UserModel : ModelWithId
     {
         public UserModel()
         {
             Microposts = new List<MicropostModel>();    
         }
-
-        [Required, HiddenInput(DisplayValue = false)]
-        public BoRef Id { get; set; }
 
         [Required, StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }

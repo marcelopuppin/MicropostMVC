@@ -1,0 +1,32 @@
+﻿<script type="text/javascript">
+    var confirmDeletion = function (user, micropost) {
+        $('#deleteMessage').dialog(
+            {
+                modal: true,
+                buttons: {
+                    No: function () {
+                        $(this).dialog("close");
+                    },
+                    Yes: function () {
+                        $(this).dialog("close");
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("Remove", "Microposts")',
+                            data: {
+                                userId: user,
+                                micropostId: micropost
+                            },
+                            success: function () {
+                                $('#' + micropost).remove();
+                            }
+                        });
+                    }
+                }
+            });
+    };
+</script>
+
+<div id="deleteMessage" title="Delete micropost" style="display:none">
+    <p>Are you sure?</p>
+</div>
+

@@ -146,11 +146,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfiguration.cs" />
+    <Compile Include="BusinessObjects\MicropostBo.cs" />
     <Compile Include="BusinessServices\HashSalt.cs" />
     <Compile Include="BusinessServices\IEncryptorBS.cs" />
     <Compile Include="BusinessServices\EncryptorBS.cs" />
     <Compile Include="BusinessServices\IHashSalt.cs" />
+    <Compile Include="BusinessServices\IMicropostBS.cs" />
     <Compile Include="BusinessServices\IUserBS.cs" />
+    <Compile Include="BusinessServices\MicropostBS.cs" />
     <Compile Include="Controllers\MicropostsController.cs" />
     <Compile Include="Controllers\SessionsController.cs" />
     <Compile Include="Framework\Common\BoRef.cs" />
@@ -177,6 +180,7 @@
     <Compile Include="BusinessServices\UserBS.cs" />
     <Compile Include="Models\MicropostModel.cs" />
     <Compile Include="Models\MicropostOwnerModel.cs" />
+    <Compile Include="Models\ModelWithId.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -328,7 +332,8 @@
     <Content Include="Views\Shared\_UserInfo.cshtml" />
     <Content Include="Views\Shared\_MicropostNew.cshtml" />
     <Content Include="Views\Microposts\Index.cshtml" />
-    <Content Include="Views\Microposts\Micropost.cshtml" />
+    <Content Include="Views\Shared\_Micropost.cshtml" />
+    <Content Include="Views\Shared\_MicropostDelete.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
