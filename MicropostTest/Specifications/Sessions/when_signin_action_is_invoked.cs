@@ -31,11 +31,6 @@ namespace MicropostTest.Specifications.Sessions
 
         };
 
-        private static NameValueCollection ValueFunction()
-        {
-            throw new NotImplementedException();
-        }
-
         Because of = () => result = controller.SignIn();
 
         It should_return_a_view = () =>
