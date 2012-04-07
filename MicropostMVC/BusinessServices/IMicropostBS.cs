@@ -9,5 +9,6 @@ namespace MicropostMVC.BusinessServices
     {
         bool Save(UserModel user, string micropostContent);
         bool Delete(UserModel user, BoRef micropostId);
+        MicropostsForUserModel GetMicropostsForUser(UserModel user);
     }
 }

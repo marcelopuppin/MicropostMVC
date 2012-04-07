@@ -1,0 +1,17 @@
+﻿@model MicropostMVC.Models.UserModel
+
+<div class="stats">
+  <table summary="User stats">
+    <tr>
+        <td>
+            <div class="stat">@Html.ActionLink("Following", "Following", "Users")</div>
+            <div class="stat">@Model.Following.Count</div>
+        </td>
+        <td>
+            <div class="stat">@Html.ActionLink("Followers", "Followers", "Users")</div>
+            <div class="stat">@Model.Followers.Count</div>
+        </td>
+    </tr>
+  </table>
+</div>
+

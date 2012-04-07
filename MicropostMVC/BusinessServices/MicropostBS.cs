@@ -37,5 +37,32 @@ namespace MicropostMVC.BusinessServices
             }
             return false;
         }
+
+        public MicropostsForUserModel GetMicropostsForUser(UserModel user)
+        {
+            var micropostsForUser = new MicropostsForUserModel();
+            micropostsForUser.User = user;
+
+            var micropostOwners = user.Microposts
+                                      .Select(m => new MicropostOwnerModel {Owner = user, Micropost = m})
+                                      .ToList();
+                                  
+            foreach (BoRef userId in user.Following)
+            {
+                var userBo = _repository.FindById<UserBo>(userId);
+                UserModel followingUser = Mapper.Map<UserBo, UserModel>(userBo);
+                if (followingUser != null)
+                {
+                    var micropostsFollowOwner = followingUser.Microposts
+                                                             .Where(m => m != null)
+                                                             .Select(m => new MicropostOwnerModel { Owner = followingUser, Micropost = m })
+                                                             .ToList();
+                    micropostOwners.AddRange(micropostsFollowOwner);
+                }
+            }
+
+            micropostsForUser.Microposts = micropostOwners.OrderByDescending(mo => mo.Micropost.CreatedAt);
+            return micropostsForUser;
+        }
     }
 }

@@ -316,6 +316,22 @@ table.microposts tr td.micropost span.timestamp {
   color: #666;
 }
 
+div.stats {
+    display: block;
+    margin-top: 1em;
+}
+
+div.stat {
+    font-size: 90%;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div.progress {
+    display: none;
+}
+
 div.user_info img {
   padding-right: 0.1em;
 }
@@ -395,3 +411,6 @@ div.user_info span.microposts
 	.blue.button:hover						{ background-color: #2575cf; }
 	.yellow.button, .yellow.button:visited	{ background-color: #ffb515; }
 	.yellow.button:hover					{ background-color: #fc9200; }
+	.greyred.button, .greyred.button:visited{ background-color: #acacac; }
+	.greyred.button:hover					{ background-color: #cf2525; }
+	

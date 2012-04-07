@@ -16,7 +16,8 @@ namespace MicropostTest.Specifications.Users
         Establish context = () =>
                                 {
                                     var userBSMock = new Mock<IUserBS>();
-                                    controller = new UsersController(userBSMock.Object);
+                                    var micropostBsMock = new Mock<IMicropostBS>();
+                                    controller = new UsersController(userBSMock.Object, micropostBsMock.Object);
                                 };
 
         Because of = () => result = controller.SignUp();

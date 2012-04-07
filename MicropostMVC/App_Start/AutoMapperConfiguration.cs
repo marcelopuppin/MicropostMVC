@@ -8,6 +8,7 @@ using MicropostMVC.BusinessObjects;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Common;
 using MicropostMVC.Models;
+using MongoDB.Bson;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(MicropostMVC.App_Start.AutoMapperConfiguration), "Start")]
 
@@ -31,14 +32,23 @@ namespace MicropostMVC.App_Start {
                            {
                                var encryptorBS = DependencyResolver.Current.GetService<IEncryptorBS>();
                                return encryptorBS.GetStoredPasswordSalt(src.Id);
-                           }));
+                           }))
+                 .ForMember(dest => dest.Following, 
+                            opt => opt.ResolveUsing<FollowingBoRefResolver>())
+                 .ForMember(dest => dest.Followers, 
+                            opt => opt.ResolveUsing<FollowersBoRefResolver>());
 
             Mapper.CreateMap<UserBo, UserModel>()
                 .ForMember(dest => dest.Id,
                            opt => opt.ResolveUsing(src => ObjectIdConverter.ConvertObjectIdToBoRef(src.Id)))
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
                 .ForMember(dest => dest.PasswordConfirmation, opt => opt.Ignore())
-                .ForMember(dest => dest.Microposts, opt => opt.ResolveUsing(src => src.Microposts.OrderByDescending(m => m.Id.CreationTime)));
+                .ForMember(dest => dest.Microposts, 
+                           opt => opt.ResolveUsing(src => src.Microposts.OrderByDescending(m => m.Id.CreationTime)))
+                .ForMember(dest => dest.Following,
+                           opt => opt.ResolveUsing<FollowingOidResolver>())
+                .ForMember(dest => dest.Followers,
+                           opt => opt.ResolveUsing<FollowersOidResolver>());
            
             // Micropost
 
@@ -55,8 +65,39 @@ namespace MicropostMVC.App_Start {
             // Validate
             Mapper.AssertConfigurationIsValid();
         }
-
-        
-
     }
+
+    #region [ Resolvers ]
+    public class FollowingBoRefResolver : ValueResolver<UserModel, List<ObjectId>>
+    {
+        protected override List<ObjectId> ResolveCore(UserModel source)
+        {
+            return source.Following.Select(ObjectIdConverter.ConvertBoRefToObjectId).ToList();
+        }
+    }
+
+    public class FollowingOidResolver : ValueResolver<UserBo, List<BoRef>>
+    {
+        protected override List<BoRef> ResolveCore(UserBo source)
+        {
+            return source.Following.Select(ObjectIdConverter.ConvertObjectIdToBoRef).ToList();
+        }
+    }
+
+    public class FollowersBoRefResolver : ValueResolver<UserModel, List<ObjectId>>
+    {
+        protected override List<ObjectId> ResolveCore(UserModel source)
+        {
+            return source.Followers.Select(ObjectIdConverter.ConvertBoRefToObjectId).ToList();
+        }
+    }
+
+    public class FollowersOidResolver : ValueResolver<UserBo, List<BoRef>>
+    {
+        protected override List<BoRef> ResolveCore(UserBo source)
+        {
+            return source.Followers.Select(ObjectIdConverter.ConvertObjectIdToBoRef).ToList();
+        }
+    }
+    #endregion
 }

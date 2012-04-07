@@ -1,5 +1,6 @@
 ﻿<script type="text/javascript">
     var confirmDeletion = function (user, micropost) {
+        $('#flash').hide();
         $('#deleteMessage').dialog(
             {
                 modal: true,
@@ -11,19 +12,27 @@
                         $(this).dialog("close");
                         $.ajax({
                             type: 'POST',
+                            dataType: 'json',  
+                            contentType: 'application/json; charset=utf-8',   
                             url: '@Url.Action("Remove", "Microposts")',
-                            data: {
-                                userId: user,
-                                micropostId: micropost
-                            },
-                            success: function () {
+                            data: JSON.stringify(SetDataForDeletion(user, micropost)),
+                            success: function(data) {
                                 $('#' + micropost).remove();
+                                window.showFlash(data, "info");
+                                window.fadeOutFlash();
+                            },
+                            error: function(data) {
+                                window.showFlash(data, "error");
                             }
                         });
                     }
                 }
             });
     };
+
+    function SetDataForDeletion(user, micropost) {
+        return { userId : user, micropostId : micropost };
+    }
 </script>
 
 <div id="deleteMessage" title="Delete micropost" style="display:none">

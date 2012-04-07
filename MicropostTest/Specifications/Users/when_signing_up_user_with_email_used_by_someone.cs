@@ -24,8 +24,10 @@ namespace MicropostTest.Specifications.Users
             var userBSMock = new Mock<IUserBS>();
             userBS = userBSMock.Object;
             userBSMock.Setup(u => u.IsEmailUsedBySomeone(user)).Returns(true);
-            
-            controller = new UsersController(userBS);
+
+            var micropostBsMock = new Mock<IMicropostBS>();
+                                
+            controller = new UsersController(userBS, micropostBsMock.Object);
         };
 
         Because of = () =>

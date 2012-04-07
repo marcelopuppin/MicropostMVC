@@ -2,8 +2,7 @@
 // Used only to populate a database 
 // Change 'environment' in App.Config to populate a development database 
   
-  
-/* 
+/*
 using System;
 using System.Globalization;
 using MicropostMVC.BusinessObjects;
@@ -36,9 +35,9 @@ namespace MicropostTest.UnitTests.Repositories
 
             private readonly string[] _names = {
                                                    "Jacob", "Isabella", "Ethan", "Sophia", "Michael",
-                                                   "Emma", "Jayden", "Olivia", "William", "Eva",
-                                                   "Alexander", "Emily", "Noah", "Abigail", "Daniel",
-                                                   "Madison", "Aiden", "Chloe", "Anthony", "Mia"
+                                                   "Ellen", "Jayden", "Olivia", "William", "Elvira",
+                                                   "Alexander", "Emily", "Nathan", "Abigail", "Daniel",
+                                                   "Madison", "Aiden", "Chloe", "Anthony", "Mirian"
                                                };
 
             public Polulator()

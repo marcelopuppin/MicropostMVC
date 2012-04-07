@@ -55,6 +55,5 @@ namespace MicropostMVC.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Home", "Pages");
         }
-
     }
 }

@@ -11,12 +11,14 @@ namespace MicropostMVC.Controllers
     public class UsersController : Controller
     {
         private readonly IUserBS _userBS;
+        private readonly IMicropostBS _micropostBS;
 
-        public UsersController(IUserBS userBS)
+        public UsersController(IUserBS userBS, IMicropostBS micropostBS)
         {
             _userBS = userBS;
+            _micropostBS = micropostBS;
         }
-        
+
         [HttpGet, AllowAnonymous]
         public ActionResult SignUp()
         {
@@ -61,7 +63,7 @@ namespace MicropostMVC.Controllers
             IEnumerable<UserModel> users = _userBS.GetUsers(0, int.MaxValue); //TODO: Users per page
             if (search != "*")
             {
-                users = users.Where(u => u.Name.ToLower().Contains(search));
+                users = users.Where(u => u.Name.ToLower().StartsWith(search));
             }
             return PartialView("Users", users);
         }
@@ -71,7 +73,33 @@ namespace MicropostMVC.Controllers
             ViewBag.FlashMessage = (isNewUser) ? "Welcome to the Sample App!" : string.Empty;
             ViewBag.FlashClass = "success";
             UserModel user = _userBS.GetUser(new BoRef(id));
-            return View(user);
+            MicropostsForUserModel micropostsForUser = _micropostBS.GetMicropostsForUser(user);
+            return View(micropostsForUser);
+        }
+
+        public ActionResult Follow(string id)
+        {
+            var loggedId = new BoRef(User.Identity.Name);
+            
+            var userId = new BoRef(id);
+            UserModel user = _userBS.GetUser(userId);
+            var micropostsForUser = new MicropostsForUserModel() { User = user };
+
+            bool followed = user.Followers.Any(r => r.Value == loggedId.Value);
+            bool result = (followed)
+                              ? _userBS.Unfollow(loggedId, user)
+                              : _userBS.Follow(loggedId, user);
+            if (result)
+            {
+                user = _userBS.GetUser(userId);
+                micropostsForUser = _micropostBS.GetMicropostsForUser(user);
+            } 
+            else
+            {
+                ViewBag.FlashMessage = "Follow/Unfollow failure!";
+                ViewBag.FlashClass = "error";
+            }
+            return View("Show", micropostsForUser);
         }
 
         public static string GetAvatarPath(UserModel user)
@@ -83,6 +111,17 @@ namespace MicropostMVC.Controllers
             }
             var avatarImage = (number > 0) ? string.Format("avatar{0}.png", number) : "noavatar.png";
             return "~/Content/images/avatars/" + avatarImage;
+        }
+
+
+        public ActionResult Following()
+        {
+            return View("Index");
+        }
+
+        public ActionResult Followers()
+        {
+            return View("Index");
         }
     }
 }

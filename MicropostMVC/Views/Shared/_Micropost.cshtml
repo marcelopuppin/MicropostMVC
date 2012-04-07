@@ -1,25 +1,27 @@
 ﻿@model MicropostMVC.Models.MicropostOwnerModel
-
-<tr id="@Model.Micropost.Id.Value">
-    <td class="avatar">
-        @{
-            var data = new ViewDataDictionary {new KeyValuePair<string, object>("class", "avatar-medium")};
-            Html.RenderPartial("_Avatar", Model.Owner, data);
-        }
-    </td>
-    <td class="micropost">
-        <span class="user">
-            @Html.ActionLink(Model.Owner.Name, "Show", "Users", Model.Owner, new {})
-        </span>
-        <span class="content">@Model.Micropost.Content</span>
-        <span class="timestamp">Posted at @Model.Micropost.CreatedAt.</span>
-    </td>
-    @if (User.Identity.Name == Model.Owner.Id.Value)
-    {
-        <td class="delete">
-            <input type="button" class="button small red" 
-                   id="deleteMicropost" value="delete"
-                   onclick="confirmDeletion('@Model.Owner.Id','@Model.Micropost.Id.Value');"/>
+@if (!string.IsNullOrEmpty(Model.Micropost.Content))
+{
+    <tr id="@Model.Micropost.Id.Value">
+        <td class="avatar">
+            @{
+                var data = new ViewDataDictionary {new KeyValuePair<string, object>("class", "avatar-medium")};
+                Html.RenderPartial("_Avatar", Model.Owner, data);
+            }
         </td>
-    }
-</tr>
+        <td class="micropost">
+            <span class="user">
+                @Html.ActionLink(Model.Owner.Name, "Show", "Users", Model.Owner, new {})
+            </span>
+            <span class="content">@Model.Micropost.Content</span>
+            <span class="timestamp">Posted at @Model.Micropost.CreatedAt.</span>
+        </td>
+        <td class="delete">
+        @if (User.Identity.Name == Model.Owner.Id.Value)
+        {
+            <input type="button" class="button small greyred" 
+                    id="deleteMicropost" value="delete"
+                    onclick=" confirmDeletion('@Model.Owner.Id','@Model.Micropost.Id.Value');"/>
+        } 
+        </td>
+    </tr>
+}

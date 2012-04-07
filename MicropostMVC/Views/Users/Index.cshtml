@@ -9,8 +9,19 @@
 
 <h2>Users</h2>
 
-@Html.Label("Search")&nbsp;
-@Html.TextBox("searchUsers")
+<table>
+    <tr>
+        <td>
+            @Html.Label("Search")&nbsp;
+            @Html.TextBox("searchUsers")
+        </td>
+        <td>
+            <div id="progress" class="progress">
+                <img src="@Url.Content("~/Content/images/progress.gif")" alt="Searching..."/>
+            </div>
+        </td>
+    </tr>
+</table>
 
 <fieldset class="round block-area">
     

@@ -11,12 +11,12 @@ jQuery ->
 	results = (query) -> 		
 		$.ajaxAsObservable(			
 			url: 'Index',			
-			data: { search: query }	)
-		 .select((r) -> r.data)	
+			data: { search: query }, 
+			beforeSend: () -> $("#progress").show()
+		).select((r) -> r.data)	
 		 
 	# bind the input text to the search service	
 	input		
 		.select(results)		
 		.switchLatest()		
-		.subscribe((r) -> $('#searchResults').html(r))
-
+		.subscribe((r) -> $("#progress").hide(); $('#searchResults').html(r))

@@ -1,5 +1,5 @@
 ﻿@using MicropostMVC.Models
-@model UserModel
+@model MicropostsForUserModel
 @{
     ViewBag.Title = "Home";
     Html.RenderPartial("_MicropostDelete");
@@ -9,21 +9,23 @@
         <td class="main">
             <h1 class="micropost">What's up?</h1>
             @{
+                Html.RenderPartial("_Message");
                 Html.RenderPartial("_MicropostNew");
             } 
         </td>
         <td class="sidebar round">
            @{
-                Html.RenderPartial("_UserInfo", Model);
+                Html.RenderPartial("_UserInfo", Model.User);
             } 
         </td>
     </tr>
 </table>
 
 <table class="microposts">
-    @foreach (MicropostModel micropost in Model.Microposts)
-     {
-        var micropostOwner = new MicropostOwnerModel {Owner = Model, Micropost = micropost};
+    <tbody data-bind='foreach: microposts'>
+    @foreach (MicropostOwnerModel micropostOwner in Model.Microposts)
+    {
         Html.RenderPartial("_Micropost", micropostOwner);
-     }
+    }
+    </tbody>
 </table>

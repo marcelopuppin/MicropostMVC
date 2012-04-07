@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Common;
@@ -20,7 +19,9 @@ namespace MicropostMVC.Controllers
 
         public ActionResult Index()
         {
-            return View(GetUserModelForAuthenticatedUser());
+            UserModel loggedUser = GetUserModelForAuthenticatedUser();
+            MicropostsForUserModel micropostsForUser = _micropostBS.GetMicropostsForUser(loggedUser);
+            return View(micropostsForUser);
         }
 
         [HttpPost]
@@ -33,6 +34,7 @@ namespace MicropostMVC.Controllers
             ViewBag.FlashClass = (isEmpty) ? "error" : "success";
 
             UserModel user = GetUserModelForAuthenticatedUser();
+            var micropostsForUser = new MicropostsForUserModel { User = user };
             if (!isEmpty)
             {
                 bool saved = _micropostBS.Save(user, content);        
@@ -43,15 +45,16 @@ namespace MicropostMVC.Controllers
                 } 
                 else
                 {
-                    user = _userBS.GetUser(user.Id); 
+                    user = _userBS.GetUser(user.Id);
+                    micropostsForUser = _micropostBS.GetMicropostsForUser(user);
                 } 
             }
 
-            return View("Index", user);
+            return View("Index", micropostsForUser);
         }
 
         [HttpPost]
-        public ActionResult Remove(string userId, string micropostId)
+        public JsonResult Remove(string userId, string micropostId)
         {
             UserModel user = _userBS.GetUser(new BoRef(userId));
             if (!user.Id.IsEmpty())
@@ -59,13 +62,10 @@ namespace MicropostMVC.Controllers
                 bool deleted = _micropostBS.Delete(user, new BoRef(micropostId));
                 if (deleted)
                 {
-                    return View("Index", user); 
+                    return Json("Micropost deleted!"); // View("Index", user); 
                 }
             }
-            
-            ViewBag.FlashMessage = "Micropost could not be deleted!";
-            ViewBag.FlashClass = "error";
-            return View("Index", user);
+            return Json("Micropost could not be deleted!");
         }
 
         private UserModel GetUserModelForAuthenticatedUser()

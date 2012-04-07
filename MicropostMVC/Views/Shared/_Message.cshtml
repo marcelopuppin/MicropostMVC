@@ -10,16 +10,27 @@
 }
 <script type="text/javascript">
     $(window).ready(function () {
-        $("#flash").append("@ViewBag.FlashMessage")
-                   .hide();
-        var visible = (@ViewBag.FlashMessage.Length > 0);
-        if (visible) {
-            $("#flash").fadeIn(3000);  
-        }
+        showFlash("@ViewBag.FlashMessage", "@ViewBag.FlashClass");
     });
+
+    var showFlash = function (message, classType) {
+        $("#flash").removeClass("*")
+                   .hide();
+    
+        var visible = (message.length > 0);
+        if (visible) {
+            $("#flash").html(message)
+                       .addClass(classType)
+                       .fadeIn(3000);
+        }
+    };
+
+    var fadeOutFlash = function() {
+        $("#flash").fadeOut(2000);
+    };
 </script>
 
 <!-- flash class: error, alert, notice, success, info -->
-<div id="flash" class="@ViewBag.FlashClass">
+<div id="flash" class="@ViewBag.FlashClass" onclick="fadeOutFlash()">
     
 </div>

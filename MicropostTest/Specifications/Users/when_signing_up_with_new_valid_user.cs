@@ -30,7 +30,9 @@ namespace MicropostTest.Specifications.Users
             userBSMock.Setup(u => u.Save(user)).Returns(userSaved);
             userBSMock.Setup(u => u.Authenticate(user));
 
-            controller = new UsersController(userBS);
+            var micropostBsMock = new Mock<IMicropostBS>();
+
+            controller = new UsersController(userBS, micropostBsMock.Object);
         };
 
         Because of = () =>

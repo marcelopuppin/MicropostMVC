@@ -1,11 +1,28 @@
 ﻿@model MicropostMVC.Models.UserModel
 
 <div class="user_info">
-  @{
-      var data = new ViewDataDictionary {new KeyValuePair<string, object>("class", "avatar-small")};
-      Html.RenderPartial("_Avatar", Model, data);
-  }
-  <span class="user_name">@Model.Name</span>
-  <span class="microposts">Micropost(s) @Model.Microposts.Count</span>
+    @{
+        var data = new ViewDataDictionary {new KeyValuePair<string, object>("class", "avatar-small")};
+        Html.RenderPartial("_Avatar", Model, data);
+    }
+    <span class="user_name">@Model.Name</span>
+    <span class="microposts" data-bind="text: totalMicroposts"></span>
+    @{
+        Html.RenderPartial("_Stats", Model);
+    }
 </div>
 
+<script src="@Url.Content("~/Scripts/knockout.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var UserInfoViewModel = function(micropostsCount) {
+        this.total = ko.observable(micropostsCount);
+
+        this.totalMicroposts = ko.computed(function() {
+            var text = (this.total() > 1) ? "Microposts" : "Micropost";
+            return this.total() + " " + text;
+        }, this);
+    };
+
+    ko.applyBindings(new UserInfoViewModel(@Model.Microposts.Count));
+</script>

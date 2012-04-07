@@ -77,5 +77,49 @@ namespace MicropostMVC.BusinessServices
             return userBos.Select(Mapper.Map<UserBo, UserModel>)
                           .OrderBy(u => u.Name);
         }
+
+        public bool Follow(BoRef loggedId, UserModel userToFollow)
+        {
+            bool result = false;
+            var loggedUserBo = _repository.FindById<UserBo>(loggedId);
+            var followUserBo = _repository.FindById<UserBo>(userToFollow.Id);
+            if (loggedUserBo != null && followUserBo != null)
+            {
+                //TODO: Transactional?
+                if (!loggedUserBo.Following.Contains(followUserBo.Id))
+                {
+                    loggedUserBo.Following.Add(followUserBo.Id);
+                    result = _repository.Save(loggedUserBo);
+                }
+                if (result && !followUserBo.Followers.Contains(loggedUserBo.Id))
+                {
+                    followUserBo.Followers.Add(loggedUserBo.Id);
+                    result = _repository.Save(followUserBo);
+                }
+            }
+            return result; 
+        }
+
+        public bool Unfollow(BoRef loggedId, UserModel userToUnfollow)
+        {
+            bool result = false;
+            var loggedUserBo = _repository.FindById<UserBo>(loggedId);
+            var unfollowUserBo = _repository.FindById<UserBo>(userToUnfollow.Id);
+            if (loggedUserBo != null && unfollowUserBo != null)
+            {
+                //TODO: Transactional?
+                if (loggedUserBo.Following.Contains(unfollowUserBo.Id))
+                {
+                    loggedUserBo.Following.Remove(unfollowUserBo.Id);
+                    result = _repository.Save(loggedUserBo);
+                }
+                if (result && unfollowUserBo.Followers.Contains(loggedUserBo.Id))
+                {
+                    unfollowUserBo.Followers.Remove(loggedUserBo.Id);
+                    result = _repository.Save(unfollowUserBo);
+                }
+            }
+            return result;
+        }
     }
 }

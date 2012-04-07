@@ -1,0 +1,13 @@
+﻿@model MicropostMVC.Models.UserModel
+
+@if (User.Identity.Name != Model.Id.Value)
+{
+    using (Html.BeginForm("Follow", "Users", new { id = Model.Id.Value })) 
+    {
+        bool followed = Model.Followers.Any(id => id.Value == User.Identity.Name);
+        string followingValue = (followed) ? "unfollow" : "follow";
+        string followingColor = (followed) ? "red" : "green";
+        <input type="submit" class="button medium @followingColor" 
+               id="Following" value="@followingValue" />
+    }
+}

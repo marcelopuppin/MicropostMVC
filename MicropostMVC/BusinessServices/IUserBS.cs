@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.DependencyResolution;
@@ -15,5 +14,7 @@ namespace MicropostMVC.BusinessServices
         void Authenticate(UserModel user);
         UserModel GetUser(BoRef id);
         IEnumerable<UserModel> GetUsers(int skip, int take);
+        bool Follow(BoRef id, UserModel userToFollow);
+        bool Unfollow(BoRef id, UserModel userToUnfollow);
     }
 }
