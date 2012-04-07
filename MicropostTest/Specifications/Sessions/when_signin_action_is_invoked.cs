@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Specialized;
 using System.Web.Mvc;
 using Machine.Specifications;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Controllers;
+using MicropostMVC.Framework.Security;
 using Moq;
 using It = Machine.Specifications.It;
 
@@ -16,8 +19,22 @@ namespace MicropostTest.Specifications.Sessions
         Establish context = () =>
         {
             var userBSMock = new Mock<IUserBS>();
+            
+            var controllerContext = new Mock<ControllerContext>();
+            var parameters = new NameValueCollection();
+            parameters.Add(CustomAuthentication.RedirectKey, "");
+            controllerContext.SetupGet(x => x.HttpContext.Request.Params)
+                             .Returns(parameters);
+
             controller = new SessionsController(userBSMock.Object);
+            controller.ControllerContext = controllerContext.Object;         
+
         };
+
+        private static NameValueCollection ValueFunction()
+        {
+            throw new NotImplementedException();
+        }
 
         Because of = () => result = controller.SignIn();
 

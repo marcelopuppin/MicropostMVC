@@ -128,7 +128,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 24
  testRunner.Then("the result is the \'Sign in\' page");
 #line 25
- testRunner.And("the \'validation-summary-errors\' message contains \'Email/Password\'");
+ testRunner.And("the \'error\' message contains \'email/password\'");
 #line hidden
             this.ScenarioCleanup();
         }

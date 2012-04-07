@@ -105,7 +105,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 16
  testRunner.Then("the result is the \'Sign up\' page");
 #line 17
- testRunner.And("the \'validation-summary-errors\' message contains \'Email\'");
+ testRunner.And("the \'alert\' message contains \'Email\'");
 #line hidden
             this.ScenarioCleanup();
         }

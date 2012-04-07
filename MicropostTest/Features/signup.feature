@@ -14,4 +14,4 @@ Scenario: Sign up a user with email saved by someone
 	And Email is already in database
 	And I click the 'Create' button
 	Then the result is the 'Sign up' page
-	And the 'validation-summary-errors' message contains 'Email' 
+	And the 'alert' message contains 'Email' 

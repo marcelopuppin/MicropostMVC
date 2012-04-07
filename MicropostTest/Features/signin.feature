@@ -22,4 +22,4 @@ Scenario: Sign in a unknown user
 	When filling the fields with unknown user
 	And I click the 'SignIn' button
 	Then the result is the 'Sign in' page
-	And the 'validation-summary-errors' message contains 'Email/Password' 
+	And the 'error' message contains 'email/password' 
