@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Common;
 using MicropostMVC.Models;
@@ -51,6 +50,23 @@ namespace MicropostMVC.Controllers
             }
 
             return View("Index", micropostsForUser);
+        }
+
+        [HttpPost]
+        public PartialViewResult Add(string micropostContent)
+        {
+            UserModel user = GetUserModelForAuthenticatedUser();
+            bool isEmpty = string.IsNullOrEmpty(micropostContent);
+            if (!isEmpty)
+            {
+                MicropostModel micropost = _micropostBS.SaveNew(user, micropostContent);
+                if (!micropost.Id.IsEmpty())
+                {
+                    var micropostOwner = new MicropostOwnerModel { Micropost = micropost, Owner = user };
+                    return PartialView("_Micropost", micropostOwner);
+                }
+            }
+            return PartialView("_Micropost", new MicropostOwnerModel { Micropost = new MicropostModel(), Owner = user });
         }
 
         [HttpPost]

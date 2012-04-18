@@ -10,7 +10,7 @@
             <h1 class="micropost">What's up?</h1>
             @{
                 Html.RenderPartial("_Message");
-                Html.RenderPartial("_MicropostNew");
+                Html.RenderPartial("_MicropostAdd");
             } 
         </td>
         <td class="sidebar round">
@@ -21,7 +21,7 @@
     </tr>
 </table>
 
-<table class="microposts">
+<table id="microposts" class="microposts">
     <tbody data-bind='foreach: microposts'>
     @foreach (MicropostOwnerModel micropostOwner in Model.Microposts)
     {

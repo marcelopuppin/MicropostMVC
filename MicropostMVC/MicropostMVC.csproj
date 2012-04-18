@@ -332,7 +332,7 @@
     <Content Include="Views\Shared\_Message.cshtml" />
     <Content Include="Views\Shared\_Avatar.cshtml" />
     <Content Include="Views\Shared\_UserInfo.cshtml" />
-    <Content Include="Views\Shared\_MicropostNew.cshtml" />
+    <Content Include="Views\Shared\_MicropostCreate.cshtml" />
     <Content Include="Views\Microposts\Index.cshtml" />
     <Content Include="Views\Shared\_Micropost.cshtml" />
     <Content Include="Views\Shared\_MicropostDelete.cshtml" />
@@ -340,6 +340,7 @@
     <Content Include="Views\Users\Follow.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\_MicropostAdd.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

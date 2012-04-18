@@ -25,6 +25,16 @@ namespace MicropostMVC.BusinessServices
             return _repository.Save(userBo);
         }
 
+        public MicropostModel SaveNew(UserModel user, string micropostContent)
+        {
+            UserBo userBo = Mapper.Map<UserModel, UserBo>(user);
+            var micropost = new MicropostModel { Content = micropostContent };
+            MicropostBo micropostBo = Mapper.Map<MicropostModel, MicropostBo>(micropost);
+            userBo.Microposts.Add(micropostBo);
+            bool saved = _repository.Save(userBo);
+            return (saved) ? Mapper.Map<MicropostBo, MicropostModel>(micropostBo) : new MicropostModel();
+        }
+
         public bool Delete(UserModel user, BoRef micropostId)
         {
             var userBo = _repository.FindById<UserBo>(user.Id);

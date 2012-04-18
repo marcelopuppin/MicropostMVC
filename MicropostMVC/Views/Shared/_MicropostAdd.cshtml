@@ -1,0 +1,36 @@
+﻿<fieldset class="round">
+    
+    <div class="micropost_new">
+        @Html.TextArea("micropostNew")
+    </div>
+
+    <p>
+        <input type="button" class="button large blue" id="Submit" value="Submit" onclick="addMicropost($('#micropostNew').val())"/>
+    </p>
+
+</fieldset>
+
+<script type="text/javascript">
+    var addMicropost = function (newMicropost) {
+        $('#flash').hide();
+        if ($.trim(newMicropost) == '') {
+            window.showFlash("Micropost cannot be blank!", "error");
+            return;
+        }
+        $.post('@Url.Action("Add", "Microposts")',
+               { micropostContent: newMicropost },
+               function (data) {
+                   $('#micropostNew').attr("value", "");
+                   $('#microposts tr:first').before(data);
+                   if (data != null) {
+                       window.showFlash("Micropost created!", "success");
+                       window.fadeOutFlash();
+                   } else {
+                       window.showFlash("Micropost could not be created!", "error");
+                   }
+               }
+        );
+    };
+
+</script>
+

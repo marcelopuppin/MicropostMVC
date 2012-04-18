@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using MicropostMVC.BusinessObjects;
@@ -33,22 +31,22 @@ namespace MicropostMVC.App_Start {
                                var encryptorBS = DependencyResolver.Current.GetService<IEncryptorBS>();
                                return encryptorBS.GetStoredPasswordSalt(src.Id);
                            }))
-                 .ForMember(dest => dest.Following, 
-                            opt => opt.ResolveUsing<FollowingBoRefResolver>())
-                 .ForMember(dest => dest.Followers, 
-                            opt => opt.ResolveUsing<FollowersBoRefResolver>());
+                 .ForMember(dest => dest.Following,
+                            opt => opt.ResolveUsing<BoRefs2OidsResolver>().FromMember(src => src.Following))
+                 .ForMember(dest => dest.Followers,
+                            opt => opt.ResolveUsing<BoRefs2OidsResolver>().FromMember(src => src.Followers));
 
             Mapper.CreateMap<UserBo, UserModel>()
                 .ForMember(dest => dest.Id,
                            opt => opt.ResolveUsing(src => ObjectIdConverter.ConvertObjectIdToBoRef(src.Id)))
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
                 .ForMember(dest => dest.PasswordConfirmation, opt => opt.Ignore())
-                .ForMember(dest => dest.Microposts, 
-                           opt => opt.ResolveUsing(src => src.Microposts.OrderByDescending(m => m.Id.CreationTime)))
+                .ForMember(dest => dest.Following, 
+                           opt => opt.MapFrom(src => src.Following))
                 .ForMember(dest => dest.Following,
-                           opt => opt.ResolveUsing<FollowingOidResolver>())
+                           opt => opt.ResolveUsing<Oids2BoRefsResolver>().FromMember(src => src.Following))
                 .ForMember(dest => dest.Followers,
-                           opt => opt.ResolveUsing<FollowersOidResolver>());
+                           opt => opt.ResolveUsing<Oids2BoRefsResolver>().FromMember(src => src.Followers));
            
             // Micropost
 
@@ -68,35 +66,19 @@ namespace MicropostMVC.App_Start {
     }
 
     #region [ Resolvers ]
-    public class FollowingBoRefResolver : ValueResolver<UserModel, List<ObjectId>>
+    public class BoRefs2OidsResolver : ValueResolver<List<BoRef>, List<ObjectId>>
     {
-        protected override List<ObjectId> ResolveCore(UserModel source)
+        protected override List<ObjectId> ResolveCore(List<BoRef> source)
         {
-            return source.Following.Select(ObjectIdConverter.ConvertBoRefToObjectId).ToList();
+            return source.Select(ObjectIdConverter.ConvertBoRefToObjectId).ToList();
         }
     }
 
-    public class FollowingOidResolver : ValueResolver<UserBo, List<BoRef>>
+    public class Oids2BoRefsResolver : ValueResolver<List<ObjectId>, List<BoRef>>
     {
-        protected override List<BoRef> ResolveCore(UserBo source)
+        protected override List<BoRef> ResolveCore(List<ObjectId> source)
         {
-            return source.Following.Select(ObjectIdConverter.ConvertObjectIdToBoRef).ToList();
-        }
-    }
-
-    public class FollowersBoRefResolver : ValueResolver<UserModel, List<ObjectId>>
-    {
-        protected override List<ObjectId> ResolveCore(UserModel source)
-        {
-            return source.Followers.Select(ObjectIdConverter.ConvertBoRefToObjectId).ToList();
-        }
-    }
-
-    public class FollowersOidResolver : ValueResolver<UserBo, List<BoRef>>
-    {
-        protected override List<BoRef> ResolveCore(UserBo source)
-        {
-            return source.Followers.Select(ObjectIdConverter.ConvertObjectIdToBoRef).ToList();
+            return source.Select(ObjectIdConverter.ConvertObjectIdToBoRef).ToList();
         }
     }
     #endregion
