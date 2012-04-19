@@ -1,0 +1,26 @@
+﻿@model MicropostMVC.Models.UserModel
+
+<script src="@Url.Content("~/Scripts/knockout.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var UserInfoViewModel = function(micropostsCount) {
+        this.total = ko.observable(micropostsCount);
+
+        this.incrementMicropost = function() {
+            this.total(this.total() + 1);
+        };
+        
+        this.decrementMicropost = function() {
+            this.total(this.total() - 1);
+        };
+        
+        this.totalMicroposts = ko.computed(function() {
+            var text = (this.total() > 1) ? "Microposts" : "Micropost";
+            return this.total() + " " + text;
+        }, this);
+    };
+
+    var userInfoViewModel = new UserInfoViewModel(@Model.Microposts.Count); 
+    ko.applyBindings(userInfoViewModel);
+   
+</script>

@@ -4,6 +4,7 @@
     ViewBag.Title = "Home";
     Html.RenderPartial("_MicropostDelete");
 }
+
 <table class="profile">
     <tr>
         <td class="main">
@@ -22,10 +23,14 @@
 </table>
 
 <table id="microposts" class="microposts">
-    <tbody data-bind='foreach: microposts'>
+    <tbody>
     @foreach (MicropostOwnerModel micropostOwner in Model.Microposts)
     {
         Html.RenderPartial("_Micropost", micropostOwner);
     }
     </tbody>
 </table>
+
+@{
+    Html.RenderPartial("_UserInfoViewModel", Model.User);
+} 

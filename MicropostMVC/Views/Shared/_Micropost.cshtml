@@ -18,9 +18,8 @@
         <td class="delete">
         @if (User.Identity.Name == Model.Owner.Id.Value)
         {
-            <input type="button" class="button small greyred" 
-                    id="deleteMicropost" value="delete"
-                    onclick=" confirmDeletion('@Model.Owner.Id','@Model.Micropost.Id.Value');"/>
+            <button class="button small greyred" id="deleteMicropost"
+                    onclick="confirmDeletion('@Model.Owner.Id','@Model.Micropost.Id.Value');">delete</button>
         } 
         </td>
     </tr>

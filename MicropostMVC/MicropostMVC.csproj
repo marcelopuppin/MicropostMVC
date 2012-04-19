@@ -341,6 +341,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Shared\_MicropostAdd.cshtml" />
+    <Content Include="Views\Shared\_UserInfoViewModel.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

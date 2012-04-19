@@ -18,6 +18,9 @@
                             data: JSON.stringify(SetDataForDeletion(user, micropost)),
                             success: function(data) {
                                 $('#' + micropost).remove();
+                                if (window.userInfoViewModel != null) {
+                                    window.userInfoViewModel.decrementMicropost();
+                                }
                                 window.showFlash(data, "info");
                                 window.fadeOutFlash();
                             },

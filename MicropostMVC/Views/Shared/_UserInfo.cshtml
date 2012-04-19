@@ -11,18 +11,3 @@
         Html.RenderPartial("_Stats", Model);
     }
 </div>
-
-<script src="@Url.Content("~/Scripts/knockout.js")" type="text/javascript"></script>
-
-<script type="text/javascript">
-    var UserInfoViewModel = function(micropostsCount) {
-        this.total = ko.observable(micropostsCount);
-
-        this.totalMicroposts = ko.computed(function() {
-            var text = (this.total() > 1) ? "Microposts" : "Micropost";
-            return this.total() + " " + text;
-        }, this);
-    };
-
-    ko.applyBindings(new UserInfoViewModel(@Model.Microposts.Count));
-</script>

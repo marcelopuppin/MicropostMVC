@@ -5,7 +5,8 @@
     </div>
 
     <p>
-        <input type="button" class="button large blue" id="Submit" value="Submit" onclick="addMicropost($('#micropostNew').val())"/>
+        <button class="button large blue" id="Submit" 
+                onclick="addMicropost($('#micropostNew').val())">Submit</button>
     </p>
 
 </fieldset>
@@ -20,9 +21,12 @@
         $.post('@Url.Action("Add", "Microposts")',
                { micropostContent: newMicropost },
                function (data) {
-                   $('#micropostNew').attr("value", "");
                    $('#microposts tr:first').before(data);
                    if (data != null) {
+                       $('#micropostNew').attr("value", "");
+                       if (window.userInfoViewModel != null) {
+                           window.userInfoViewModel.incrementMicropost();
+                       }
                        window.showFlash("Micropost created!", "success");
                        window.fadeOutFlash();
                    } else {
