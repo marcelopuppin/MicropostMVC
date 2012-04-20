@@ -6,6 +6,7 @@ using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.Repository;
 using System.Linq;
 using MicropostMVC.Models;
+using MongoDB.Bson;
 
 namespace MicropostMVC.BusinessServices
 {
@@ -74,6 +75,15 @@ namespace MicropostMVC.BusinessServices
         public IEnumerable<UserModel> GetUsers(int skip, int take)
         {
             IEnumerable<UserBo> userBos = _repository.FindAll<UserBo>(skip, take);
+            return userBos.Select(Mapper.Map<UserBo, UserModel>)
+                          .OrderBy(u => u.Name);
+        }
+
+        public IEnumerable<UserModel> GetUsers(IEnumerable<BoRef> userIds)
+        {
+            IEnumerable<ObjectId> oids = userIds.Select(ObjectIdConverter.ConvertBoRefToObjectId);
+            IEnumerable<UserBo> userBos = _repository.FindAll<UserBo>()
+                                                     .Where(u => oids.Contains(u.Id));
             return userBos.Select(Mapper.Map<UserBo, UserModel>)
                           .OrderBy(u => u.Name);
         }

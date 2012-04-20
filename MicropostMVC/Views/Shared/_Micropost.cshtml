@@ -13,7 +13,7 @@
                 @Html.ActionLink(Model.Owner.Name, "Show", "Users", Model.Owner, new {})
             </span>
             <span class="content">@Model.Micropost.Content</span>
-            <span class="timestamp">Posted at @Model.Micropost.CreatedAt.</span>
+            <span class="timestamp">Posted on @Model.Micropost.CreatedAt.ToLocalTime()</span>
         </td>
         <td class="delete">
         @if (User.Identity.Name == Model.Owner.Id.Value)

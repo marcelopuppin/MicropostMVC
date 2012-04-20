@@ -1,0 +1,9 @@
+﻿@model IEnumerable<MicropostMVC.Models.UserModel>
+
+<h2>@ViewBag.Title</h2>
+
+<fieldset class="round block-area">
+@{
+    Html.RenderPartial("Users", Model);
+}    
+</fieldset>

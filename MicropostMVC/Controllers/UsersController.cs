@@ -102,6 +102,22 @@ namespace MicropostMVC.Controllers
             return View("Show", micropostsForUser);
         }
 
+        public ActionResult Following()
+        {
+            ViewBag.Title = "Following";
+            UserModel user = _userBS.GetUser(new BoRef(User.Identity.Name));
+            IEnumerable<UserModel> following = _userBS.GetUsers(user.Following);
+            return View("Following", following);
+        }
+
+        public ActionResult Followers()
+        {
+            ViewBag.Title = "Followers";
+            UserModel user = _userBS.GetUser(new BoRef(User.Identity.Name));
+            IEnumerable<UserModel> followers = _userBS.GetUsers(user.Followers);
+            return View("Following", followers);
+        }
+
         public static string GetAvatarPath(UserModel user)
         {
             int number = 0;
@@ -111,17 +127,6 @@ namespace MicropostMVC.Controllers
             }
             var avatarImage = (number > 0) ? string.Format("avatar{0}.png", number) : "noavatar.png";
             return "~/Content/images/avatars/" + avatarImage;
-        }
-
-
-        public ActionResult Following()
-        {
-            return View("Index");
-        }
-
-        public ActionResult Followers()
-        {
-            return View("Index");
         }
     }
 }
