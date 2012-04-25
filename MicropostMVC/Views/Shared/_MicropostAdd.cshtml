@@ -21,8 +21,12 @@
         $.post('@Url.Action("Add", "Microposts")',
                { micropostContent: newMicropost },
                function (data) {
-                   $('#microposts tr:first').before(data);
                    if (data != null) {
+                       if ($('#microposts tr').length == 0) {
+                           $('#microposts').append(data);
+                       } else {
+                           $('#microposts tr:first').before(data);
+                       }
                        $('#micropostNew').attr("value", "");
                        if (window.userInfoViewModel != null) {
                            window.userInfoViewModel.incrementMicropost();

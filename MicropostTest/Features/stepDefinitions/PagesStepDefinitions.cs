@@ -10,7 +10,7 @@ namespace MicropostTest.Features.stepDefinitions
         [Given("a startup root page")]
         public void GivenAStartupRootPage()
         {
-            WebBrowser.Current.GoTo(WebBrowser.UrlMicropostsMvc);
+            WebBrowser.Current.GoTo(WebBrowser.UrlMicropostMvc);
             WebBrowser.Current.WaitForComplete();
         }
 

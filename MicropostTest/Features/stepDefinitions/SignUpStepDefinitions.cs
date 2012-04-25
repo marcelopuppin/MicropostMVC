@@ -13,7 +13,7 @@ namespace MicropostTest.Features.stepDefinitions
         [Given("a sign up page")]
         public void GivenASignUpPage()
         {
-            WebBrowser.Current.GoTo(WebBrowser.UrlMicropostsMvc + "/Users/SignUp");
+            WebBrowser.Current.GoTo(WebBrowser.UrlMicropostMvc + "/Users/SignUp");
             WebBrowser.Current.WaitForComplete();
         }
 

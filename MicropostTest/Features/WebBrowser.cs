@@ -1,3 +1,4 @@
+using System.Configuration;
 using TechTalk.SpecFlow;
 using WatiN.Core;
 
@@ -18,9 +19,9 @@ namespace MicropostTest.Features
             }
         }
 
-        public static string UrlMicropostsMvc
+        public static string UrlMicropostMvc
         {
-            get { return "http://localhost:10351"; }
+            get { return ConfigurationManager.AppSettings["UrlMicropostMvc"]; }
         }
     }
 }

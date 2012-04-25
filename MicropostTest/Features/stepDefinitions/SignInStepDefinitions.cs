@@ -11,7 +11,7 @@ namespace MicropostTest.Features.stepDefinitions
         [Given("a sign in page")]
         public void GivenASignInPage()
         {
-            WebBrowser.Current.GoTo(WebBrowser.UrlMicropostsMvc + "/Sessions/SignIn");
+            WebBrowser.Current.GoTo(WebBrowser.UrlMicropostMvc + "/Sessions/SignIn");
             WebBrowser.Current.WaitForComplete();
         }
 
