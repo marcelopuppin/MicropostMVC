@@ -4,7 +4,7 @@
     var input, results;
     input = $('#searchUsers').keyupAsObservable().select(function(e) {
       return $('#searchUsers').val();
-    }).throttle(250).distinctUntilChanged();
+    }).throttle(500).distinctUntilChanged();
     results = function(query) {
       return $.ajaxAsObservable({
         url: 'Index',

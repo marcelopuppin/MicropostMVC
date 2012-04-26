@@ -1,9 +1,11 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
 using MicropostMVC.Framework.Common;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace MicropostMVC.Framework.Repository
 {
@@ -70,6 +72,20 @@ namespace MicropostMVC.Framework.Repository
             return collection.FindOneAs<T>(query);
         }
 
+        public IEnumerable<T> FindUsingFilter<T>(Func<T, bool> filter, int skip = 0, int take = int.MaxValue) where T : IBoBase
+        {
+            MongoCollection collection = GetCollection<T>();
+            
+            IEnumerable<T> query = collection.AsQueryable<T>()
+                                             .Where(filter)
+                                             .Skip(skip)
+                                             .Take(take);
+                                             
+            var list = new List<T>();
+            list.AddRange(query);
+            return list;
+        }
+
         public IEnumerable<T> FindAll<T>(int skip = 0, int take = int.MaxValue) where T : IBoBase
         {
             MongoCollection collection = GetCollection<T>();
@@ -77,7 +93,7 @@ namespace MicropostMVC.Framework.Repository
             cursor.SetSkip(skip);
             cursor.SetLimit(take);
             cursor.SetMaxScan(take);
-            
+
             var list = new List<T>();
             list.AddRange(cursor);
             return list;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Web.Security;
 using AutoMapper;
@@ -84,6 +85,18 @@ namespace MicropostMVC.BusinessServices
             IEnumerable<ObjectId> oids = userIds.Select(ObjectIdConverter.ConvertBoRefToObjectId);
             IEnumerable<UserBo> userBos = _repository.FindAll<UserBo>()
                                                      .Where(u => oids.Contains(u.Id));
+            return userBos.Select(Mapper.Map<UserBo, UserModel>)
+                          .OrderBy(u => u.Name);
+        }
+
+        public IEnumerable<UserModel> GetUsersByName(string search, int skip, int take)
+        {
+            Func<UserBo, bool> filter = (u => u.Name.Length > 0);
+            if (search != "*")
+            {
+                filter = (u => u.Name.ToLower().StartsWith(search));
+            }
+            IEnumerable<UserBo> userBos = _repository.FindUsingFilter(filter, skip, take);
             return userBos.Select(Mapper.Map<UserBo, UserModel>)
                           .OrderBy(u => u.Name);
         }

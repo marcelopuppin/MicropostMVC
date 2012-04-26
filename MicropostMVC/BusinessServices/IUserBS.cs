@@ -15,6 +15,7 @@ namespace MicropostMVC.BusinessServices
         UserModel GetUser(BoRef id);
         IEnumerable<UserModel> GetUsers(int skip, int take);
         IEnumerable<UserModel> GetUsers(IEnumerable<BoRef> userIds);
+        IEnumerable<UserModel> GetUsersByName(string search, int skip, int take);
         bool Follow(BoRef id, UserModel userToFollow);
         bool Unfollow(BoRef id, UserModel userToUnfollow);
     }

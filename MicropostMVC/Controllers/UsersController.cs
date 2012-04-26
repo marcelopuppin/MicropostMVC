@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
@@ -59,12 +60,14 @@ namespace MicropostMVC.Controllers
             {
                 return PartialView("Users");
             }
+
+            //IEnumerable<UserModel> users = _userBS.GetUsers(filter, 0, int.MaxValue);
+            //if (search != "*")
+            //{
+            //    users = users.Where(u => u.Name.ToLower().StartsWith(search));
+            //}
             
-            IEnumerable<UserModel> users = _userBS.GetUsers(0, int.MaxValue); //TODO: Users per page
-            if (search != "*")
-            {
-                users = users.Where(u => u.Name.ToLower().StartsWith(search));
-            }
+            IEnumerable<UserModel> users = _userBS.GetUsersByName(search, 0, 300);
             return PartialView("Users", users);
         }
 

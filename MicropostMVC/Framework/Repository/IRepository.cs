@@ -13,6 +13,7 @@ namespace MicropostMVC.Framework.Repository
         bool Remove<T>(BoRef id) where T : IBoBase;
         T FindById<T>(BoRef id) where T : IBoBase;
         T FindByKeyValue<T>(string key, object value) where T : IBoBase;
+        IEnumerable<T> FindUsingFilter<T>(Func<T, bool> filter, int skip = 0, int take = int.MaxValue) where T : IBoBase;
         IEnumerable<T> FindAll<T>(int skip = 0, int take = int.MaxValue) where T : IBoBase;
     }
 }

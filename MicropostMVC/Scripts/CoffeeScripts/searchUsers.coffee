@@ -4,7 +4,7 @@ jQuery ->
 	input = $('#searchUsers')		
 		.keyupAsObservable()		
 		.select((e) -> $('#searchUsers').val())		
-		.throttle(250)		
+		.throttle(500)		
 		.distinctUntilChanged()	
 		
 	# define an ajax request to get the search results	
