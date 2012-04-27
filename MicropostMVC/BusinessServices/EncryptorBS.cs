@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using MicropostMVC.BusinessObjects;
+﻿using MicropostMVC.BusinessObjects;
 using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.Repository;
 

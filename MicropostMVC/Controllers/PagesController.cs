@@ -1,6 +1,4 @@
 ﻿using System.Web.Mvc;
-using MicropostMVC.Framework.Common;
-using MicropostMVC.Models;
 
 namespace MicropostMVC.Controllers
 {

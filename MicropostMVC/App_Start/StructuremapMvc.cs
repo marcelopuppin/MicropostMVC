@@ -1,6 +1,4 @@
-using System.Globalization;
 using System.Web.Mvc;
-using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.DependencyResolution;
 using StructureMap;
 
@@ -12,7 +10,6 @@ namespace MicropostMVC.App_Start
     {
         public static void Start()
         {
-            //IContainer container = IoC.Initialize();
             IContainer container = new Container(x => {
                 x.For<IControllerActivator>().Use<SmControllerActivator>();
                 x.Scan(c => {

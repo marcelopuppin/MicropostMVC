@@ -1,11 +1,7 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson;
-
 namespace MicropostMVC.Framework.Repository
 {
     /// <summary>
-    /// Marker Interface foor BusinessObjetcs
+    /// Marker Interface for BusinessObjetcs
     /// </summary>
     public interface IBoBase
     {

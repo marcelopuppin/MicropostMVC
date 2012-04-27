@@ -167,7 +167,6 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Framework\Common\Encryptor.cs" />
     <Compile Include="Framework\DependencyResolution\InjectAttribute.cs" />
-    <Compile Include="Framework\DependencyResolution\IoC.cs" />
     <Compile Include="Framework\DependencyResolution\SmDependencyResolver.cs" />
     <Compile Include="Framework\DependencyResolution\SmControllerActivator.cs" />
     <Compile Include="Framework\DependencyResolution\SmInjectAttributeConvention.cs" />
