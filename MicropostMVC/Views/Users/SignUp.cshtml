@@ -16,37 +16,7 @@
 @using (Html.BeginForm()) {
                                       
     <fieldset class="round">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password, "password")
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PasswordConfirmation)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PasswordConfirmation, "password")
-            @Html.ValidationMessageFor(model => model.PasswordConfirmation)
-        </div>
+        @Html.Partial("_Fields", Model)
         <p>
             <input type="submit" class="button large blue" id="Create" value="Create" />
         </p>

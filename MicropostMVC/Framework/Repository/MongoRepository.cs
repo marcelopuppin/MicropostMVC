@@ -98,7 +98,7 @@ namespace MicropostMVC.Framework.Repository
             list.AddRange(cursor);
             return list;
         }
-
+  
         public void Dispose()
         {
             _server.Disconnect();

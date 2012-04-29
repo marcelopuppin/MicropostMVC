@@ -4,8 +4,9 @@
         @if (User.Identity.IsAuthenticated)
         {
             <li>@Html.ActionLink("Home", "Index", "Microposts")</li>
-            <li>@Html.ActionLink("Help", "Help", "Pages")</li>
             <li>@Html.ActionLink("Users", "Index", "Users")</li>
+            <li>@Html.ActionLink("Settings", "Edit", "Users")</li>
+            <li>@Html.ActionLink("Help", "Help", "Pages")</li>
             <li>@Html.ActionLink("Sign out", "SignOut", "Sessions")</li>
         }
         else

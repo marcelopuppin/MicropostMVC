@@ -1,0 +1,63 @@
+﻿@model MicropostMVC.Models.UserModel
+
+@{
+    ViewBag.Title = "Settings";
+}
+
+<h2>Edit User</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@{
+    Html.RenderPartial("_Message");
+}
+
+@using (Html.BeginForm("Update", "Users", FormMethod.Post, new { enctype="multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.Id);
+                              
+    <fieldset class="round">
+        <div class="editor-label">
+            @Html.Label("Avatar")
+        </div>
+        <div class="editor-field">
+            @Html.Partial("_Avatar", Model)
+            <span class="button medium greyred file-button">
+                <span>Change</span>
+                <input type="file" id="avatarFile" name="avatarFile"/>
+            </span>
+        </div>
+        @{
+            Html.RenderPartial("_Fields", Model);
+        }
+        <p>
+            <input type="submit" class="button large blue" id="Update" value="Update" />
+        </p>
+    </fieldset>
+}
+
+<script type="text/javascript">
+    var loadAvatarFromFile = function (event) {
+        if (!window.FileReader) {
+            var fileName = $("#avatarFile").val().split('\\').pop();
+            window.showFlash("File '" + fileName + "' was selected for uploading.", "info");
+            return;
+        }
+
+        var file = event.target.files[0];
+        if (!file.type.match('image.*')) {
+            return;
+        }
+
+        var reader = new window.FileReader();
+        reader.onload = (function() {
+            return function (e) {
+                $("#avatar_@Model.Id.Value").attr("src", e.target.result);
+            };
+        })(file);
+        reader.readAsDataURL(file);
+    };
+
+    $("#avatarFile").bind("change", {}, loadAvatarFromFile);
+</script>

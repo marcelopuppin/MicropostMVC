@@ -16,5 +16,5 @@
         classValue = ViewData["class"].ToString();
     }
 }
-<img src="@Url.Content(avatarPath)" alt="@Model.Name" class="@classValue"/>
+<img id="avatar_@Model.Id.Value"src="@Url.Content(avatarPath)" alt="@Model.Name" class="@classValue"/>
         

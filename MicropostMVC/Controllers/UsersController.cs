@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Providers.Entities;
 using MicropostMVC.BusinessServices;
 using MicropostMVC.Framework.Common;
 using MicropostMVC.Models;
@@ -80,13 +82,35 @@ namespace MicropostMVC.Controllers
             return View(micropostsForUser);
         }
 
+        public ActionResult Edit()
+        {
+            var loggedId = new BoRef(User.Identity.Name);
+            UserModel user = _userBS.GetUser(loggedId);
+            return View("Settings", user);
+        }
+
+        [HttpPost]
+        public ActionResult Update(UserModel user, HttpPostedFileBase avatarFile)
+        {
+            var loggedId = new BoRef(User.Identity.Name);
+            UserModel loggedUser = _userBS.GetUser(loggedId);
+            
+            if (avatarFile != null && avatarFile.ContentLength > 0)
+            {
+                string path = GetAvatarPath(loggedUser);
+                avatarFile.SaveAs(path);
+            }
+            
+            return RedirectToAction("Show", "Users", new { id = loggedId });
+        }
+
         public ActionResult Follow(string id)
         {
             var loggedId = new BoRef(User.Identity.Name);
             
             var userId = new BoRef(id);
             UserModel user = _userBS.GetUser(userId);
-            var micropostsForUser = new MicropostsForUserModel() { User = user };
+            var micropostsForUser = new MicropostsForUserModel { User = user };
 
             bool followed = user.Followers.Any(r => r.Value == loggedId.Value);
             bool result = (followed)
@@ -123,12 +147,7 @@ namespace MicropostMVC.Controllers
 
         public static string GetAvatarPath(UserModel user)
         {
-            int number = 0;
-            if (!user.Id.IsEmpty())
-            {
-                int.TryParse(user.Id.Value.Last().ToString(CultureInfo.InvariantCulture), out number);
-            }
-            var avatarImage = (number > 0) ? string.Format("avatar{0}.png", number) : "noavatar.png";
+            var avatarImage = (!user.Id.IsEmpty()) ? string.Format("avatar_{0}.png", user.Id.Value) : "noavatar.png";
             return "~/Content/images/avatars/" + avatarImage;
         }
     }

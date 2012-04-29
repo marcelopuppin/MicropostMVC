@@ -43,6 +43,27 @@ textarea {
     min-height: 100px;    
 }
 
+.file-button {
+    position: relative;  
+    overflow: hidden;  
+    float: left;  
+    margin-right: 4px;
+}
+
+.file-button input {
+    position: absolute;  
+    top: 0;  
+    right: 0;  
+    margin: 0;  
+    border: solid transparent;  
+    border-width: 0 0 100px 200px;  
+    opacity: 0;  
+    filter: alpha(opacity=0);  
+    -moz-transform: translate(-300, 0) scale(4);  
+    direction: ltr;  
+    cursor: pointer;
+}
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error
