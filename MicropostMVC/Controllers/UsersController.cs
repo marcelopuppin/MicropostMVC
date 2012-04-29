@@ -38,7 +38,7 @@ namespace MicropostMVC.Controllers
                 return View(user);
             }
             
-            UserModel userSaved = _userBS.Save(user);
+            UserModel userSaved = _userBS.Save(user, true);
             if (userSaved.Id.IsEmpty()) 
             {
                 ViewBag.FlashMessage = "Sign up failure!";
@@ -63,12 +63,6 @@ namespace MicropostMVC.Controllers
                 return PartialView("Users");
             }
 
-            //IEnumerable<UserModel> users = _userBS.GetUsers(filter, 0, int.MaxValue);
-            //if (search != "*")
-            //{
-            //    users = users.Where(u => u.Name.ToLower().StartsWith(search));
-            //}
-            
             IEnumerable<UserModel> users = _userBS.GetUsersByName(search, 0, 300);
             return PartialView("Users", users);
         }
@@ -92,16 +86,25 @@ namespace MicropostMVC.Controllers
         [HttpPost]
         public ActionResult Update(UserModel user, HttpPostedFileBase avatarFile)
         {
-            var loggedId = new BoRef(User.Identity.Name);
-            UserModel loggedUser = _userBS.GetUser(loggedId);
-            
-            if (avatarFile != null && avatarFile.ContentLength > 0)
+            UserModel loggedUser = _userBS.GetUser(user.Id);
+            if (loggedUser.Email != user.Email && 
+                _userBS.IsEmailUsedBySomeone(user))
             {
-                string path = GetAvatarPath(loggedUser);
-                avatarFile.SaveAs(path);
+                ViewBag.FlashMessage = "Email is already used by someone.";
+                ViewBag.FlashClass = "alert";
+                return View("Settings", user);
             }
-            
-            return RedirectToAction("Show", "Users", new { id = loggedId });
+
+            if (TryUpdateModel(loggedUser))
+            {
+                loggedUser = _userBS.Save(loggedUser, true);
+                if (avatarFile != null && avatarFile.ContentLength > 0)
+                {
+                    string path = Server.MapPath(GetAvatarPath(loggedUser));
+                    avatarFile.SaveAs(path);
+                }
+            }
+            return RedirectToAction("Show", "Users", new { id = loggedUser.Id.Value });
         }
 
         public ActionResult Follow(string id)

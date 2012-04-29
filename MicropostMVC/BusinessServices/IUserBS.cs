@@ -8,7 +8,7 @@ namespace MicropostMVC.BusinessServices
     [Inject]
     public interface IUserBS
     {
-        UserModel Save(UserModel user);
+        UserModel Save(UserModel user, bool updatePassword);
         bool IsEmailUsedBySomeone(UserModel user);
         UserModel Login(UserModel user);
         void Authenticate(UserModel user);

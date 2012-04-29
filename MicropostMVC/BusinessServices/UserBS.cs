@@ -22,11 +22,10 @@ namespace MicropostMVC.BusinessServices
             _encryptorBS = encryptorBS;
         }
 
-        public UserModel Save(UserModel user)
+        public UserModel Save(UserModel user, bool updatePassword)
         {
             UserBo userBo = Mapper.Map<UserModel, UserBo>(user);
-            if (string.IsNullOrEmpty(userBo.PasswordHash) ||
-                string.IsNullOrEmpty(userBo.PasswordSalt))
+            if (updatePassword)
             {
                 IHashSalt hashSalt = _encryptorBS.CreatePasswordHashSalt(user.Password);
                 userBo.PasswordHash = hashSalt.Hash;

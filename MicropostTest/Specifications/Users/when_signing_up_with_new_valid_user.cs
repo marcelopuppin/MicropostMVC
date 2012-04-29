@@ -27,7 +27,7 @@ namespace MicropostTest.Specifications.Users
             var userBSMock = new Mock<IUserBS>();
             userBS = userBSMock.Object;
             userBSMock.Setup(u => u.IsEmailUsedBySomeone(user)).Returns(false);
-            userBSMock.Setup(u => u.Save(user)).Returns(userSaved);
+            userBSMock.Setup(u => u.Save(user, true)).Returns(userSaved);
             userBSMock.Setup(u => u.Authenticate(user));
 
             var micropostBsMock = new Mock<IMicropostBS>();

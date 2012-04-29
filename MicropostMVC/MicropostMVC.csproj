@@ -158,6 +158,7 @@
     <Compile Include="BusinessServices\MicropostBS.cs" />
     <Compile Include="Controllers\MicropostsController.cs" />
     <Compile Include="Controllers\SessionsController.cs" />
+    <Compile Include="Framework\ModelBinder\BoRefModelBinder.cs" />
     <Compile Include="Framework\Common\BoRef.cs" />
     <Compile Include="Framework\Common\ObjectIdConverter.cs" />
     <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />

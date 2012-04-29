@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MicropostMVC.Framework.Binder;
+using MicropostMVC.Framework.Common;
 using MicropostMVC.Framework.Security;
 
 namespace MicropostMVC
@@ -46,6 +48,9 @@ namespace MicropostMVC
 
             BundleTable.Bundles.RegisterTemplateBundles();
             //BundleTable.Bundles.EnableDefaultBundles();
+
+            //ModelBinders.Binders.DefaultBinder = new BoRefModelBinder();
+            ModelBinders.Binders.Add(typeof(BoRef), new BoRefModelBinder());
         }
     }
 }
