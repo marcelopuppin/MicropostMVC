@@ -97,12 +97,14 @@ namespace MicropostMVC.Controllers
 
             if (TryUpdateModel(loggedUser))
             {
-                loggedUser = _userBS.Save(loggedUser, true);
-                if (avatarFile != null && avatarFile.ContentLength > 0)
+                bool avatarChanged = (avatarFile != null && avatarFile.ContentLength > 0);
+                if (avatarChanged)
                 {
+                    loggedUser.Avatar = FormatAvatarName(loggedUser, avatarFile);
                     string path = Server.MapPath(GetAvatarPath(loggedUser));
                     avatarFile.SaveAs(path);
                 }
+                loggedUser = _userBS.Save(loggedUser, true);
             }
             return RedirectToAction("Show", "Users", new { id = loggedUser.Id.Value });
         }
@@ -148,10 +150,23 @@ namespace MicropostMVC.Controllers
             return View("Following", followers);
         }
 
+        #region [ Avatar ]
         public static string GetAvatarPath(UserModel user)
         {
-            var avatarImage = (!user.Id.IsEmpty()) ? string.Format("avatar_{0}.png", user.Id.Value) : "noavatar.png";
-            return "~/Content/images/avatars/" + avatarImage;
+            return "~/Content/images/avatars/" + GetAvatarName(user);
         }
+
+        private static string GetAvatarName(UserModel user)
+        {
+            return (string.IsNullOrEmpty(user.Avatar) || user.Id.IsEmpty())
+                    ? "noavatar.png"
+                    : user.Avatar;
+        }
+
+        private string FormatAvatarName(UserModel user, HttpPostedFileBase file)
+        {
+            return string.Format("avatar_{0}.{1}", user.Id.Value, file.ContentType.Split('/')[1]);
+        }
+        #endregion
     }
 }

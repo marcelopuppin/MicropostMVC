@@ -22,6 +22,8 @@ namespace MicropostMVC.BusinessObjects
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
 
+        public string Avatar { get; set; }
+
         public List<MicropostBo> Microposts { get; private set; }
         
         public List<ObjectId> Following { get; private set; }

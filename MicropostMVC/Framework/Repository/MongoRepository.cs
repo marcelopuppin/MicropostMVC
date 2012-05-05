@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Configuration;
 using MicropostMVC.Framework.Common;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -19,15 +18,11 @@ namespace MicropostMVC.Framework.Repository
             get { return _database; }
         }
 
-        public MongoRepository()
+        public MongoRepository(string databaseName, string connectionString)
         {
-            string environment = ConfigurationManager.AppSettings["environment"];
+            _server = MongoServer.Create(connectionString);
 
-            string connection = ConfigurationManager.ConnectionStrings[environment].ConnectionString;
-            _server = MongoServer.Create(connection);
-
-            string databaseName = ConfigurationManager.ConnectionStrings[environment].Name;
-            SafeMode safeMode = SafeMode.Create(1, TimeSpan.FromSeconds(30)); // 30 second timeout
+            SafeMode safeMode = SafeMode.Create(1, TimeSpan.FromSeconds(30)); // timeout (sec)
             _database = _server.GetDatabase(databaseName, safeMode);
         }
 
@@ -46,6 +41,7 @@ namespace MicropostMVC.Framework.Repository
             } 
             catch(MongoSafeModeException)
             {
+                //Safemode detected an error 'E11000 duplicate key error index'
                 return false;
             }
         }

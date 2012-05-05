@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using MicropostMVC.BusinessObjects;
 using MicropostMVC.Framework.Common;
@@ -16,7 +17,8 @@ namespace MicropostTest.UnitTests.Repositories
         [SetUp]
         public void Setup()
         {
-            _repository = new MongoRepository();
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["test"];
+            _repository = new MongoRepository(settings.Name, settings.ConnectionString);
             DBCleanUp();
         }
 

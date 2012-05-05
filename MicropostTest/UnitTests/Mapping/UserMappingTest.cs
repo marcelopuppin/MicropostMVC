@@ -11,7 +11,7 @@ namespace MicropostTest.UnitTests.Mapping
     [TestFixture]
     public class UserMappingTest
     {
-        [SetUp]
+        [TestFixtureSetUp]
         public void SetUp()
         {
             StructuremapMvc.Start();

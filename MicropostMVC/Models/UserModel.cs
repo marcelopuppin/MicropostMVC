@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using DataAnnotationsExtensions;
 using MicropostMVC.Framework.Common;
 
@@ -27,6 +28,9 @@ namespace MicropostMVC.Models
          EqualTo("Password"),
          Display(Name = "Confirmation")]
         public string PasswordConfirmation { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string Avatar { get; set; }
 
         public List<MicropostModel> Microposts { get; private set; }
 
